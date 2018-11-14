@@ -1,4 +1,4 @@
-package dynamicworksheet.types;
+package dynamicworksheet.type;
 
 public enum InteractType {
     Click, Toggle, Input, Select

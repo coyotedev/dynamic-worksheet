@@ -1,14 +1,14 @@
 package dynamicworksheet.util;
 
 import com.google.gson.*;
-import dynamicworksheet.jsondummy.operations.JsonDummyOperationBinary;
-import dynamicworksheet.jsondummy.operations.JsonDummyOperationMany;
-import dynamicworksheet.jsondummy.operations.JsonDummyOperationOne;
+import dynamicworksheet.jsondummy.operation.JsonDummyOperationBinary;
+import dynamicworksheet.jsondummy.operation.JsonDummyOperationMany;
+import dynamicworksheet.jsondummy.operation.JsonDummyOperationOne;
 import dynamicworksheet.jsondummy.value.JsonDummyValueConst;
 import dynamicworksheet.jsondummy.value.JsonDummyValueModel;
 import dynamicworksheet.jsondummy.value.JsonDummyValueRef;
 import dynamicworksheet.jsondummy.value.JsonDummyValuei18n;
-import dynamicworksheet.types.ValueType;
+import dynamicworksheet.type.ValueType;
 
 import java.lang.reflect.Type;
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class JsonDummyBase implements IJsonDummy {
     @SerializedName("id")
-    public final String mId = "";
+    public String mId = "";
     @SerializedName("validations")
     public List<JsonDummyValidation> mValidations;
     @SerializedName("hidden")

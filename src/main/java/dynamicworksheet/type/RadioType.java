@@ -1,4 +1,4 @@
-package dynamicworksheet.types;
+package dynamicworksheet.type;
 
 import com.google.gson.annotations.SerializedName;
 

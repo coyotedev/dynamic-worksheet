@@ -2,7 +2,7 @@ package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
-import dynamicworksheet.types.CheckSubType;
+import dynamicworksheet.type.CheckSubType;
 
 public class JsonDummyCheck extends JsonDummyBase {
     @SerializedName("subType")

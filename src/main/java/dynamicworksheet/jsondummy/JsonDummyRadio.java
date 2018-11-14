@@ -3,8 +3,8 @@ package dynamicworksheet.jsondummy;
 import com.google.gson.annotations.SerializedName;
 import dynamicworksheet.jsondummy.option.JsonDummyOption;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
-import dynamicworksheet.types.RadioSubType;
-import dynamicworksheet.types.RadioType;
+import dynamicworksheet.type.RadioSubType;
+import dynamicworksheet.type.RadioType;
 
 import java.util.List;
 

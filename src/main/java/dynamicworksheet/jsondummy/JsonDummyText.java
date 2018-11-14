@@ -2,7 +2,7 @@ package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
-import dynamicworksheet.types.ElementTextType;
+import dynamicworksheet.type.ElementTextType;
 
 public class JsonDummyText extends JsonDummyBase {
     @SerializedName("kind")

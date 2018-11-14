@@ -3,7 +3,7 @@ package dynamicworksheet.jsondummy;
 import com.google.gson.annotations.SerializedName;
 import dynamicworksheet.jsondummy.option.JsonDummyOption;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
-import dynamicworksheet.types.SelectSubType;
+import dynamicworksheet.type.SelectSubType;
 
 import java.util.List;
 

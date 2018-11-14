@@ -4,7 +4,7 @@ import com.google.gson.*;
 import dynamicworksheet.jsondummy.validation.validationcase.JsonDummyValidationCaseMinLength;
 import dynamicworksheet.jsondummy.validation.validationcase.JsonDummyValidationCaseRequired;
 import dynamicworksheet.jsondummy.validation.validationcase.JsonDummyValidationCaseUpload;
-import dynamicworksheet.types.ValidationCaseType;
+import dynamicworksheet.type.ValidationCaseType;
 
 import java.lang.reflect.Type;
 

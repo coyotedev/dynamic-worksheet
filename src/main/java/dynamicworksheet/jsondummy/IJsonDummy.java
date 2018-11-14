@@ -1,7 +1,9 @@
 package dynamicworksheet.jsondummy;
 
-/**
- * marker-interface
- */
+import dynamicworksheet.element.IElement;
+
 public interface IJsonDummy {
+    default IElement getElement(IElement root) {
+        return null;
+    }
 }

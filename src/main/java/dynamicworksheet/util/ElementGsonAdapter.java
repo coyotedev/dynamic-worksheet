@@ -2,7 +2,7 @@ package dynamicworksheet.util;
 
 import com.google.gson.*;
 import dynamicworksheet.jsondummy.*;
-import dynamicworksheet.types.UIType;
+import dynamicworksheet.type.UIType;
 
 import java.lang.reflect.Type;
 

@@ -2,12 +2,23 @@ package dynamicworksheet.jsondummy.value;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
 public class JsonDummyValuei18n implements IJsonDummyValue {
-    class I18N {
+    public class I18N {
         @SerializedName("ru")
-        public final String mVariantRU = "";
+        public String mVariantRU;
         @SerializedName("en")
-        public final String mVariantEN = "";
+        public String mVariantEN;
+
+        public Map<String, String> getMappedValue() {
+            Map<String, String> ret = new HashMap<>();
+            ret.put(new Locale("ru").getLanguage(), mVariantRU);
+            ret.put(new Locale("en").getLanguage(), mVariantEN);
+            return ret;
+        }
     }
 
     @SerializedName("i18n")
