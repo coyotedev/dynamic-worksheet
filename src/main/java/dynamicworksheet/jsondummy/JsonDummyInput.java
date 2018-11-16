@@ -36,8 +36,9 @@ public class JsonDummyInput extends JsonDummyBase {
 
     @Override
     public IElement getElement(IElement root) {
-        ElementInput ret = new ElementInput(root);
-        ret.setValidations(mValidations);
-        return ret;
+//        ElementInput ret = new ElementInput(root);
+//        ret.setValidations(mValidations);
+//        return ret;
+        return null;
     }
 }

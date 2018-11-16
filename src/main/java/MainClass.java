@@ -1,6 +1,9 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+import dynamicworksheet.Value.ValueReference;
+import dynamicworksheet.Value.ValueUI;
+import dynamicworksheet.element.ElementInput;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.IJsonDummy;
 import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
@@ -30,5 +33,20 @@ public class MainClass {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ValueUI<String> val = new ValueUI<>();
+        val.setValue("TEST");
+        ElementInput inp1 = new ElementInput(null, val);
+        ElementInput inp2 = new ElementInput(null, new ValueReference<>(inp1, "LOL"));
+
+        inp1.setValue("TEST1");
+        System.out.println(inp2.getValue());
+
+        inp1.setValue("TEST2");
+        System.out.println(inp2.getValue());
+
+        inp1.setValue("TEST3");
+        System.out.println(inp2.getValue());
+
     }
 }

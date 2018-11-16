@@ -1,4 +1,4 @@
-package dynamicworksheet.jsondummy.operation;
+package dynamicworksheet.jsondummy.value.operation;
 
 import com.google.gson.annotations.SerializedName;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;

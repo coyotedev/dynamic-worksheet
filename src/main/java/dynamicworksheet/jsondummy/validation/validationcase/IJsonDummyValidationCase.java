@@ -1,4 +1,6 @@
 package dynamicworksheet.jsondummy.validation.validationcase;
 
-public interface IJsonDummyValidationCase {
+import dynamicworksheet.jsondummy.value.IJsonDummyValue;
+
+public interface IJsonDummyValidationCase extends IJsonDummyValue {
 }

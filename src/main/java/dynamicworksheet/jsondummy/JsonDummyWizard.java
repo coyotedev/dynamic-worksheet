@@ -6,9 +6,9 @@ import dynamicworksheet.element.IElement;
 
 public class JsonDummyWizard extends JsonDummyContainer {
     @SerializedName("next")
-    public String mNextCaption = "";
+    public String mNextCaption;
     @SerializedName("prev")
-    public String mPrevCaption = "";
+    public String mPrevCaption;
 
     @Override
     public IElement getElement(IElement root) {

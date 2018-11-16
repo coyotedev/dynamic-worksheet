@@ -1,6 +1,5 @@
 package dynamicworksheet.element;
 
-import com.sun.istack.internal.NotNull;
 import dynamicworksheet.bundles.IBundle;
 import dynamicworksheet.jsondummy.validation.JsonDummyValidation;
 import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
@@ -17,17 +16,21 @@ import dynamicworksheet.validation.IValidation;
 import dynamicworksheet.validation.ValidationMinLength;
 import dynamicworksheet.validation.ValidationRequired;
 import dynamicworksheet.validation.ValidationUpload;
+import io.reactivex.Observable;
 import io.reactivex.annotations.Nullable;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class ElementBase implements IElement {
+public abstract class ElementBase<T> implements IElement<T> {
 
     protected String mId;
     protected UIType mType;
     protected List<IValidation> mValidations;
+    protected BehaviorSubject<T> mObservable = BehaviorSubject.create();
 
     private final IElement mRoot;
     private List<IElement> mChildren;
@@ -55,8 +58,13 @@ public abstract class ElementBase implements IElement {
     }
 
     @Override
-    public Object getValue() {
+    public T getValue() {
         return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
     }
 
     @Override
@@ -128,5 +136,10 @@ public abstract class ElementBase implements IElement {
     @Override
     public List<IValidation> getValidations() {
         return mValidations;
+    }
+
+    @Override
+    public BehaviorSubject<T> getObservable() {
+        return mObservable;
     }
 }

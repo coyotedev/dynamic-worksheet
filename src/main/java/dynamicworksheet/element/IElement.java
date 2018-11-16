@@ -3,13 +3,14 @@ package dynamicworksheet.element;
 import dynamicworksheet.bundles.IBundle;
 import dynamicworksheet.bundles.validation.ValidationBundleBase;
 import dynamicworksheet.jsondummy.validation.JsonDummyValidation;
-import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
 import dynamicworksheet.type.UIType;
 import dynamicworksheet.validation.IValidation;
+import io.reactivex.subjects.BehaviorSubject;
+import io.reactivex.subjects.PublishSubject;
 
 import java.util.List;
 
-public interface IElement {
+public interface IElement<T> {
 
     // интерфейс, реализуемый адаптером UI на конкретной платформе, сигнал CUI (core UI) -> RUI (real UI)
     interface Adapter {
@@ -20,7 +21,8 @@ public interface IElement {
     void setId(String id);
     String getid();
     UIType getType();
-    Object getValue();
+    void setValue(T value);
+    T getValue();
 
     // дергается при взаимодействии человека с элементом RUI, сигнал RUI -> CUI
     void onInteract(IBundle bundle);
@@ -33,4 +35,6 @@ public interface IElement {
 
     void setValidations(List<JsonDummyValidation> validations);
     List<IValidation> getValidations();
+
+    BehaviorSubject<T> getObservable();
 }

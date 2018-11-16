@@ -1,9 +1,9 @@
 package dynamicworksheet.util;
 
 import com.google.gson.*;
-import dynamicworksheet.jsondummy.operation.JsonDummyOperationBinary;
-import dynamicworksheet.jsondummy.operation.JsonDummyOperationMany;
-import dynamicworksheet.jsondummy.operation.JsonDummyOperationOne;
+import dynamicworksheet.jsondummy.value.operation.JsonDummyOperationBinary;
+import dynamicworksheet.jsondummy.value.operation.JsonDummyOperationMany;
+import dynamicworksheet.jsondummy.value.operation.JsonDummyOperationOne;
 import dynamicworksheet.jsondummy.value.JsonDummyValueConst;
 import dynamicworksheet.jsondummy.value.JsonDummyValueModel;
 import dynamicworksheet.jsondummy.value.JsonDummyValueRef;

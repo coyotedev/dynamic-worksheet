@@ -1,28 +1,27 @@
 package dynamicworksheet.element;
 
+import dynamicworksheet.Value.IValue;
 import dynamicworksheet.type.UIType;
-import dynamicworksheet.util.mutablevalue.MutableString;
 
-public class ElementInput extends ElementBase {
+public class ElementInput extends ElementBase<String> {
 
-    private MutableString mText;
+    private IValue<String> mValue;
 
-    public ElementInput(IElement root) {
+    public ElementInput(IElement root, IValue<String> value) {
         super(root);
         mType = UIType.Input;
-        mText = new MutableString("");
-    }
-
-    public String getText() {
-        return mText.getValue();
-    }
-
-    public void setText(String text) {
-        mText.setValue(text);
+        mValue = value;
+        mObservable.onNext(mValue.getValue());
     }
 
     @Override
-    public Object getValue() {
-        return mText;
+    public void setValue(String value) {
+        mValue.setValue(value);
+        mObservable.onNext(mValue.getValue());
+    }
+
+    @Override
+    public String getValue() {
+        return mValue.getValue();
     }
 }
