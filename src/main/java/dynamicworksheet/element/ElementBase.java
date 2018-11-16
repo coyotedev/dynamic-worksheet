@@ -1,5 +1,6 @@
 package dynamicworksheet.element;
 
+import dynamicworksheet.Value.IValue;
 import dynamicworksheet.bundles.IBundle;
 import dynamicworksheet.jsondummy.validation.JsonDummyValidation;
 import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
@@ -16,10 +17,7 @@ import dynamicworksheet.validation.IValidation;
 import dynamicworksheet.validation.ValidationMinLength;
 import dynamicworksheet.validation.ValidationRequired;
 import dynamicworksheet.validation.ValidationUpload;
-import io.reactivex.Observable;
 import io.reactivex.annotations.Nullable;
-import io.reactivex.subjects.BehaviorSubject;
-import io.reactivex.subjects.PublishSubject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +27,9 @@ public abstract class ElementBase<T> implements IElement<T> {
 
     protected String mId;
     protected UIType mType;
+    protected IValue<T> mValue;
+//    protected ValueLogical mHidden;
     protected List<IValidation> mValidations;
-    protected BehaviorSubject<T> mObservable = BehaviorSubject.create();
 
     private final IElement mRoot;
     private List<IElement> mChildren;
@@ -57,14 +56,24 @@ public abstract class ElementBase<T> implements IElement<T> {
         return mType;
     }
 
+//    @Override
+//    public void setHidden(ValueLogical value) {
+//        mHidden = value;
+//    }
+//
+//    @Override
+//    public boolean getHidden() {
+//        return mHidden.getValue();
+//    }
+
     @Override
-    public T getValue() {
-        return null;
+    public IValue<T> getValue() {
+        return mValue;
     }
 
     @Override
-    public void setValue(T value) {
-
+    public void setValue(IValue<T> value) {
+        mValue = value;
     }
 
     @Override
@@ -136,10 +145,5 @@ public abstract class ElementBase<T> implements IElement<T> {
     @Override
     public List<IValidation> getValidations() {
         return mValidations;
-    }
-
-    @Override
-    public BehaviorSubject<T> getObservable() {
-        return mObservable;
     }
 }

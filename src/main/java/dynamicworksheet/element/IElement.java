@@ -1,12 +1,12 @@
 package dynamicworksheet.element;
 
+import dynamicworksheet.Value.IValue;
 import dynamicworksheet.bundles.IBundle;
 import dynamicworksheet.bundles.validation.ValidationBundleBase;
 import dynamicworksheet.jsondummy.validation.JsonDummyValidation;
 import dynamicworksheet.type.UIType;
 import dynamicworksheet.validation.IValidation;
 import io.reactivex.subjects.BehaviorSubject;
-import io.reactivex.subjects.PublishSubject;
 
 import java.util.List;
 
@@ -21,8 +21,10 @@ public interface IElement<T> {
     void setId(String id);
     String getid();
     UIType getType();
-    void setValue(T value);
-    T getValue();
+//    void setHidden(ValueLogical value);
+//    boolean getHidden();
+    void setValue(IValue<T> value);
+    IValue<T> getValue();
 
     // дергается при взаимодействии человека с элементом RUI, сигнал RUI -> CUI
     void onInteract(IBundle bundle);
@@ -35,6 +37,4 @@ public interface IElement<T> {
 
     void setValidations(List<JsonDummyValidation> validations);
     List<IValidation> getValidations();
-
-    BehaviorSubject<T> getObservable();
 }
