@@ -1,12 +1,12 @@
 package dynamicworksheet.validation;
 
-import dynamicworksheet.util.mutablevalue.MutableString;
+import dynamicworksheet.Value.IValue;
 
 public class ValidationMinLength extends ValidationBase {
-    private final MutableString mValue;
+    private final IValue<String> mValue;
     private final Integer mMinLength;
 
-    public ValidationMinLength(final MutableString value, Integer min, String error) {
+    public ValidationMinLength(final IValue<String> value, Integer min, String error) {
         super(error);
         mValue = value;
         mMinLength = min;

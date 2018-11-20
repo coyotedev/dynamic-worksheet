@@ -1,5 +1,6 @@
 package dynamicworksheet.validation;
 
+import dynamicworksheet.Value.IValue;
 import dynamicworksheet.util.mutablevalue.MutableFileParams;
 import dynamicworksheet.util.mutablevalue.MutableValue;
 
@@ -24,10 +25,10 @@ public class ValidationUpload extends ValidationBase {
         put("Gb", 3);
     }};
 
-    private final MutableFileParams mParams;
-    private final MutableFileParams mReference;
+    private final IValue<FileParams> mParams;
+    private final FileParams mReference;
 
-    public ValidationUpload(MutableFileParams params, MutableFileParams ref, String error) {
+    public ValidationUpload(IValue<FileParams> params, FileParams ref, String error) {
         super(error);
         mParams = params;
         mReference = ref;
@@ -35,7 +36,7 @@ public class ValidationUpload extends ValidationBase {
 
     @Override
     public boolean isPassed() {
-        return mReference.getValue().isFits(mParams.getValue());
+        return mReference.isFits(mParams.getValue());
     }
 
     public static class FileParams {

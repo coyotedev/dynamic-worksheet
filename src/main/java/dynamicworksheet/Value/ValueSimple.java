@@ -7,6 +7,12 @@ public class ValueSimple<T> implements IValue<T> {
     private T mValue;
     private BehaviorSubject<T> mObservable = BehaviorSubject.create();
 
+    public ValueSimple() {}
+
+    public ValueSimple(T value) {
+        setValue(value);
+    }
+
     @Override
     public void setValue(T value) {
         mValue = value;

@@ -1,6 +1,9 @@
 package dynamicworksheet.jsondummy.value;
 
 import com.google.gson.annotations.SerializedName;
+import dynamicworksheet.Value.IValue;
+import dynamicworksheet.Value.ValueI18N;
+import dynamicworksheet.element.IElement;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -23,4 +26,9 @@ public class JsonDummyValuei18n implements IJsonDummyValue {
 
     @SerializedName("i18n")
     public final I18N mValue = new I18N();
+
+    @Override
+    public IValue getValue(IElement node) {
+        return new ValueI18N(mValue);
+    }
 }

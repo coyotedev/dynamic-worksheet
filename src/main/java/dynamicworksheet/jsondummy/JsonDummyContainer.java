@@ -25,6 +25,7 @@ public class JsonDummyContainer extends JsonDummyBase {
     @Override
     public IElement getElement(IElement root) {
         ElementContainer ret = new ElementContainer(root);
+        ret.setId(mId);
         ret.setLayout(mLayoutType);
         ret.setChildren(transformChildren(ret, mChildren));
         return ret;

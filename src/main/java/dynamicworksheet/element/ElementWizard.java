@@ -1,30 +1,31 @@
 package dynamicworksheet.element;
 
 import dynamicworksheet.type.UIType;
+import io.reactivex.annotations.Nullable;
 
 public class ElementWizard extends ElementContainer {
 
-    private String mNext;
-    private String mPrev;
+    private String mNextCaption;
+    private String mPrevCaption;
 
-    public ElementWizard(IElement root) {
+    public ElementWizard(@Nullable IElement root) {
         super(root);
         mType = UIType.Wizard;
     }
 
-    public void setNext(String caption) {
-        mNext = caption;
+    public void setNextCaption(String caption) {
+        mNextCaption = caption;
     }
 
-    public String getNext() {
-        return mNext;
+    public String getNextCaption() {
+        return mNextCaption;
     }
 
-    public void setPrev(String caption) {
-        mPrev = caption;
+    public void setPrevCaption(String caption) {
+        mPrevCaption = caption;
     }
 
-    public String getPrev() {
-        return mPrev;
+    public String getPrevCaption() {
+        return mPrevCaption;
     }
 }

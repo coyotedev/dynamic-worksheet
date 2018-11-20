@@ -16,8 +16,8 @@ public class JsonDummyWizard extends JsonDummyContainer {
         ret.setId(mId);
         ret.setValidations(mValidations);
         // TODO: hidden
-        ret.setNext(mNextCaption);
-        ret.setPrev(mPrevCaption);
+        ret.setNextCaption(mNextCaption);
+        ret.setPrevCaption(mPrevCaption);
         ret.setChildren(transformChildren(ret, mChildren));
         return ret;
     }
