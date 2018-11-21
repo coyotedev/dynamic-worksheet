@@ -1,0 +1,75 @@
+package net.coyotedev.androidworksheet.uiadapter;
+
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import dynamicworksheet.element.ElementInput;
+import dynamicworksheet.element.IElement;
+import dynamicworksheet.message.interact.MessageInteract;
+import dynamicworksheet.message.interact.MessageInteractFocusChanged;
+import dynamicworksheet.message.interact.MessageInteractTextChanged;
+import dynamicworksheet.validation.IValidation;
+
+public class ElementInputAdapter implements IElementAdapter {
+    @Override
+    public View build(final IElement element, ViewGroup root, final Context ctx) {
+        final EditText ret = new EditText(ctx);
+        ElementInput input = (ElementInput) element;
+        input.setValidationHandler(new IValidation.ValidationHandler() {
+            @Override
+            public void onPassed() {
+//                Toast.makeText(ctx, "PASSED", Toast.LENGTH_SHORT).show();
+                ret.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_green_light));
+            }
+
+            @Override
+            public void onError(String error) {
+//                Toast.makeText(ctx, error, Toast.LENGTH_SHORT).show();
+                ret.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_red_light));
+            }
+        });
+        ret.setHint(input.getPlaceholder());
+
+        // core ui connection setup
+        {
+            element.setAdapter(new AdapterBase(ret) {
+                @Override
+                public void onInteract(MessageInteract message) {
+                    super.onInteract(message);
+                    if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
+                        MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
+                        if (!ret.getText().toString().equals(msg.mText)) {
+                            ret.setText(msg.mText);
+                        }
+                    }
+                }
+            });
+
+            ret.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    element.onInteract(new MessageInteractTextChanged(charSequence.toString()));
+                }
+                @Override
+                public void afterTextChanged(Editable editable) {}
+            });
+
+            ret.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean b) {
+                    element.onInteract(new MessageInteractFocusChanged(b));
+                }
+            });
+        }
+
+        return ret;
+    }
+}

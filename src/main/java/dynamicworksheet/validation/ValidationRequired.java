@@ -1,16 +1,24 @@
 package dynamicworksheet.validation;
 
+import dynamicworksheet.Value.IValue;
+
 public class ValidationRequired extends ValidationBase {
 
-    private final Object mObject;
+    private final IValue mObject;
 
-    public ValidationRequired(Object obj, String error) {
+    public ValidationRequired(IValue obj, String error) {
         super(error);
         mObject = obj;
     }
 
     @Override
     public boolean isPassed() {
-        return mObject != null;
+        Object obj = mObject.getValue();
+        if (obj != null) {
+            if (obj.getClass().isAssignableFrom(String.class)) {
+                return !((String) obj).isEmpty();
+            }
+        }
+        return false;
     }
 }

@@ -65,7 +65,7 @@ public abstract class ElementBase<T> implements IElement<T> {
 
     @Override
     public boolean getHidden() {
-        return mHidden.getValue().equals("true");
+        return mHidden.getValue();
     }
 
     @Override
@@ -139,7 +139,7 @@ public abstract class ElementBase<T> implements IElement<T> {
             } // TODO: add others
 
             if (clazzCase.isAssignableFrom(JsonDummyValidationCaseRequired.class)) {
-                mValidations.add(new ValidationRequired(getValue().getValue(), error));
+                mValidations.add(new ValidationRequired(getValue(), error));
             } else if (clazzCase.isAssignableFrom(JsonDummyValidationCaseMinLength.class)) {
                 if (getValue().getValue().getClass().isAssignableFrom(String.class)) {
                     mValidations.add(new ValidationMinLength((IValue<String>) getValue(), ((JsonDummyValidationCaseMinLength) it.mValid).mMinLength, error));
@@ -163,9 +163,14 @@ public abstract class ElementBase<T> implements IElement<T> {
     }
 
     @Override
-    public void checkValid() {
-        for (IValidation it : mValidations) {
-            it.check(mValidationHandler);
+    public boolean checkValid() {
+        if (mValidations == null) {
+            return true;
         }
+        boolean ret = true;
+        for (IValidation it : mValidations) {
+            ret &= it.check(mValidationHandler);
+        }
+        return ret;
     }
 }

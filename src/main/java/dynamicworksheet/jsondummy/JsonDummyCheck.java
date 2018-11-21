@@ -25,8 +25,9 @@ public class JsonDummyCheck extends JsonDummyBase {
 
     @Override
     public IElement getElement(IElement root) {
-        IElement ret = new ElementCheckbox(root, new ValueSimple<>(false));
+        ElementCheckbox ret = new ElementCheckbox(root, new ValueSimple<>(false));
         ret.setId(mId);
+        ret.setLabel((String) mLabel.getValue(ret).getValue());
         return ret;
     }
 }

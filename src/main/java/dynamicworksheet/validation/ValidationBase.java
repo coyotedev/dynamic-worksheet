@@ -12,15 +12,16 @@ public abstract class ValidationBase extends ValueSimple<Boolean> implements IVa
     }
 
     @Override
-    public void check(ValidationHandler handler) {
-        if (handler == null) {
-            return;
+    public boolean check(ValidationHandler handler) {
+        boolean ret = isPassed();
+        if (handler != null) {
+            if (ret) {
+                handler.onPassed();
+            } else {
+                handler.onError(getError());
+            }
         }
-        if (isPassed()) {
-            handler.onPassed();
-        } else {
-            handler.onError(getError());
-        }
+        return ret;
     }
 
     @Override

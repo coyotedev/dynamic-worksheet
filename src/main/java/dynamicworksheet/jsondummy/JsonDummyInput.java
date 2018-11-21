@@ -16,6 +16,8 @@ public class JsonDummyInput extends JsonDummyBase {
     public String mAbout;
     @SerializedName("defaultValue")
     public String mDefaultValue;
+    @SerializedName("value")
+    public IJsonDummyValue mValue;
     @SerializedName("mask")
     public String mMask;
     @SerializedName("prefix")
@@ -39,8 +41,14 @@ public class JsonDummyInput extends JsonDummyBase {
     public IElement getElement(IElement root) {
         ElementInput ret = new ElementInput(root, new ValueSimple<>(mDefaultValue));
         ret.setId(mId);
-        ret.setValidations(mValidations);
         ret.setHidden(mHidden.getValue(ret));
+        if (mValue != null) {
+            ret.setValue(mValue.getValue(ret));
+        }
+        ret.setValidations(mValidations);
+        if (mPlaceholder != null) {
+            ret.setPlaceholder((String) mPlaceholder.getValue(ret).getValue());
+        }
         return ret;
     }
 }

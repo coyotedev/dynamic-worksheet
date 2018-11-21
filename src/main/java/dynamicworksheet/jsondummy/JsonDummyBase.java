@@ -1,6 +1,7 @@
 package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
+import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.validation.JsonDummyValidation;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
 
@@ -13,4 +14,9 @@ public class JsonDummyBase implements IJsonDummy {
     public List<JsonDummyValidation> mValidations;
     @SerializedName("hidden")
     public IJsonDummyValue mHidden;
+
+    @Override
+    public IElement getElement(IElement root) {
+        return null;
+    }
 }

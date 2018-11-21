@@ -1,0 +1,2 @@
+include ':app', ":dynamic-worksheet"
+project(':dynamic-worksheet').projectDir = new File(settingsDir, '../../dynamic-worksheet')

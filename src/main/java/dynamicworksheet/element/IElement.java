@@ -14,7 +14,6 @@ public interface IElement<T> {
     // интерфейс, реализуемый адаптером UI на конкретной платформе, сигнал CUI (core UI) -> RUI (real UI)
     interface Adapter {
         void onInteract(MessageInteract message);
-        void onValidation(MessageValidation message); // possible FIXME: возможно слияние с onInteract ?..
     }
 
     void setId(String id);
@@ -38,5 +37,5 @@ public interface IElement<T> {
     List<IElement> getChildren();
 
     void setValidations(List<JsonDummyValidation> validations);
-    void checkValid();
+    boolean checkValid();
 }

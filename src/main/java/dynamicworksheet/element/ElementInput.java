@@ -10,10 +10,20 @@ import io.reactivex.functions.Consumer;
 
 public class ElementInput extends ElementBase<String> {
 
+    private String mPlaceholder;
+
     public ElementInput(@Nullable IElement root, IValue<String> value) {
         super(root);
         mType = UIType.Input;
         setValue(value);
+    }
+
+    public void setPlaceholder(String placeholder) {
+        mPlaceholder = placeholder;
+    }
+
+    public String getPlaceholder() {
+        return mPlaceholder;
     }
 
     @Override

@@ -6,7 +6,7 @@ public interface IValidation {
         public abstract void onError(String error);
     }
 
-    void check(ValidationHandler handler);
+    boolean check(ValidationHandler handler);
     boolean isPassed();
     String getError();
 }
