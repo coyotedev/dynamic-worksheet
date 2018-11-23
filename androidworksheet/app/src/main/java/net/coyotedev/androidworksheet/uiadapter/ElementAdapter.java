@@ -31,6 +31,8 @@ public class ElementAdapter implements IElementAdapter {
                 return new ElementInputAdapter().build(element, root, ctx);
             case CheckBox:
                 return new ElementCheckboxAdapter().build(element, root, ctx);
+            case Text:
+                return new ElementTextAdapter().build(element, root, ctx);
         }
         return null;
     }

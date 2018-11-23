@@ -2,6 +2,7 @@ package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
 import dynamicworksheet.Value.ValueSimple;
+import dynamicworksheet.element.ElementBase;
 import dynamicworksheet.element.ElementCheckbox;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
@@ -26,8 +27,16 @@ public class JsonDummyCheck extends JsonDummyBase {
     @Override
     public IElement getElement(IElement root) {
         ElementCheckbox ret = new ElementCheckbox(root, new ValueSimple<>(false));
-        ret.setId(mId);
-        ret.setLabel((String) mLabel.getValue(ret).getValue());
+        set(ret);
         return ret;
+    }
+
+    @Override
+    protected void set(ElementBase element) {
+        super.set(element);
+        ElementCheckbox casted = (ElementCheckbox) element;
+        if (mLabel != null) {
+            casted.setLabel((String) mLabel.getValue(casted).getValue());
+        }
     }
 }

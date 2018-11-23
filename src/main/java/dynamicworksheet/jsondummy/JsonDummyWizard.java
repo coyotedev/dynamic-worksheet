@@ -1,6 +1,8 @@
 package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
+
+import dynamicworksheet.element.ElementBase;
 import dynamicworksheet.element.ElementWizard;
 import dynamicworksheet.element.IElement;
 
@@ -13,12 +15,15 @@ public class JsonDummyWizard extends JsonDummyContainer {
     @Override
     public IElement getElement(IElement root) {
         ElementWizard ret = new ElementWizard(root);
-        ret.setId(mId);
-        ret.setValidations(mValidations);
-        // TODO: hidden
-        ret.setNextCaption(mNextCaption);
-        ret.setPrevCaption(mPrevCaption);
-        ret.setChildren(transformChildren(ret, mChildren));
+        set(ret);
         return ret;
+    }
+
+    @Override
+    protected void set(ElementBase element) {
+        super.set(element);
+        ElementWizard casted = (ElementWizard) element;
+        casted.setNextCaption(mNextCaption);
+        casted.setPrevCaption(mPrevCaption);
     }
 }

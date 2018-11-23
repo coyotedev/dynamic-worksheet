@@ -1,7 +1,10 @@
 package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
+
+import dynamicworksheet.Value.IValue;
 import dynamicworksheet.Value.ValueSimple;
+import dynamicworksheet.element.ElementBase;
 import dynamicworksheet.element.ElementInput;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
@@ -40,15 +43,19 @@ public class JsonDummyInput extends JsonDummyBase {
     @Override
     public IElement getElement(IElement root) {
         ElementInput ret = new ElementInput(root, new ValueSimple<>(mDefaultValue));
-        ret.setId(mId);
-        ret.setHidden(mHidden.getValue(ret));
-        if (mValue != null) {
-            ret.setValue(mValue.getValue(ret));
-        }
-        ret.setValidations(mValidations);
-        if (mPlaceholder != null) {
-            ret.setPlaceholder((String) mPlaceholder.getValue(ret).getValue());
-        }
+        set(ret);
         return ret;
+    }
+
+    @Override
+    protected void set(ElementBase element) {
+        super.set(element);
+        ElementInput casted = (ElementInput) element;
+        if (mValue != null) {
+            casted.setValue(mValue.getValue(casted));
+        }
+        if (mPlaceholder != null) {
+            casted.setPlaceholder((String) mPlaceholder.getValue(casted).getValue());
+        }
     }
 }
