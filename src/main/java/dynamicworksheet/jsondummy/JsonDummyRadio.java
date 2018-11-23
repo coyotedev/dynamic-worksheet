@@ -1,11 +1,18 @@
 package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
+
+import dynamicworksheet.Value.ValueSimple;
+import dynamicworksheet.element.ElementBase;
+import dynamicworksheet.element.ElementRadioGroup;
+import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.option.JsonDummyOption;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
+import dynamicworksheet.option.Option;
 import dynamicworksheet.type.RadioSubType;
 import dynamicworksheet.type.RadioType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class JsonDummyRadio extends JsonDummyBase {
@@ -29,4 +36,27 @@ public class JsonDummyRadio extends JsonDummyBase {
     public IJsonDummyValue mLabel;
     @SerializedName("options")
     public List<JsonDummyOption> mOptions;
+
+    @Override
+    public IElement getElement(IElement root) {
+        ElementRadioGroup ret = new ElementRadioGroup(root, new ValueSimple<>(""));
+        set(ret);
+        return ret;
+    }
+
+    @Override
+    protected void set(ElementBase element) {
+        super.set(element);
+        ElementRadioGroup casted = (ElementRadioGroup) element;
+        if (mOptions != null && !mOptions.isEmpty()) {
+            List<Option> options = new ArrayList<>();
+            for (JsonDummyOption it : mOptions) {
+                options.add(it.get());
+            }
+            casted.setOptions(options);
+        }
+        if (mLabel != null) {
+            casted.setLabel(mLabel.getValue(casted));
+        }
+    }
 }
