@@ -1,25 +1,16 @@
 package net.coyotedev.androidworksheet;
 
-import android.content.res.AssetManager;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParser;
 
 import net.coyotedev.androidworksheet.uiadapter.ElementAdapter;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import dynamicworksheet.element.IElement;
@@ -64,12 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
             ViewGroup rootLayout = findViewById(R.id.id_mainlayout);
             View v = ElementAdapter.getInstance().build(rootElement, rootLayout, this);
-//            View v = getLayoutInflater().inflate(R.layout.v_wizard, rootLayout, false);
             rootLayout.addView(v);
-
-//            IElement checkbox = ((IElement) ((IElement) rootElement.getChildren().get(1)).getChildren().get(0));
-//            checkbox.getValue().setValue(true);
-//            System.out.println(checkbox);
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -38,11 +38,11 @@ public class ElementCheckbox extends ElementBase<Boolean> {
     @Override
     public void setAdapter(Adapter adapter) {
         super.setAdapter(adapter);
-        getValue().getObservable().subscribe(new Consumer<Boolean>() {
+        mAdapterSubscribes.add(getValue().getObservable().subscribe(new Consumer<Boolean>() {
             @Override
             public void accept(Boolean value) throws Exception {
                 adapter.onInteract(new MessageInteractCheckedChanged(value));
             }
-        });
+        }));
     }
 }

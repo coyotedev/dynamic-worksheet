@@ -47,11 +47,11 @@ public class ElementInput extends ElementBase<String> {
     @Override
     public void setAdapter(Adapter adapter) {
         super.setAdapter(adapter);
-        getValue().getObservable().subscribe(new Consumer<String>() {
+        mAdapterSubscribes.add(getValue().getObservable().subscribe(new Consumer<String>() {
             @Override
             public void accept(String text) throws Exception {
                 adapter.onInteract(new MessageInteractTextChanged(text));
             }
-        });
+        }));
     }
 }

@@ -81,7 +81,7 @@
               "placeholder": {
                 "type": "i18n",
                 "i18n": {
-                  "ru": "Страна",
+                  "ru": "Страна1",
                   "vn": "Страна",
                   "en": "Страна"
                 }
@@ -284,6 +284,650 @@
                         "value": {
                           "type": "value",
                           "ref": "n79oqxswd"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Дом",
+                  "vn": "Дом",
+                  "en": "Дом"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Дом",
+                  "vn": "Дом",
+                  "en": "Дом"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "34234fsf-43fghds7s-32hrfnes1",
+      "ui": "container",
+      "layout": "vertical",
+      "c": [
+        {
+          "id": "dee6e4d1-70b7-42de-9038-2facf640ce241",
+          "ui": "container",
+          "layout": "horizontal",
+          "c": [
+            {
+              "id": "n79oqxswd1",
+              "bindPath": "registration",
+              "ui": "check",
+              "subType": "checkbox",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Совпадает с адресом фактического проживания",
+                  "vn": "Совпадает с адресом фактического проживания",
+                  "en": "Совпадает с адресом фактического проживания"
+                }
+              },
+              "validations": []
+            }
+          ]
+        },
+        {
+          "id": "190404ea-890f-4b89-b226-e0253e0692751",
+          "ui": "container",
+          "layout": "vertical",
+          "c": [
+            {
+              "id": "ircbblxkg1",
+              "bindPath": "country",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Страна",
+                  "vn": "Страна",
+                  "en": "Страна"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Страна2",
+                  "vn": "Страна",
+                  "en": "Страна"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": [
+                {
+                  "valid": {
+                    "type": "required"
+                  },
+                  "error": {
+                    "type": "i18n",
+                    "i18n": {
+                      "ru": "поле обязательное для заполнения!",
+                      "vn": "поле обязательное для заполнения!",
+                      "en": "поле обязательное для заполнения!"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "jqajitjuc1",
+              "bindPath": "city",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "value": {
+                "type": "value",
+                "ref": "ircbblxkg"
+              },
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Город",
+                  "vn": "Город",
+                  "en": "Город"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Город",
+                  "vn": "Город",
+                  "en": "Город"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": [
+                {
+                  "valid": {
+                    "type": "required"
+                  },
+                  "error": {
+                    "type": "i18n",
+                    "i18n": {
+                      "ru": "поле обязательное для заполнения!",
+                      "vn": "поле обязательное для заполнения!",
+                      "en": "поле обязательное для заполнения!"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "a552db82-d51b-4f2f-a724-3e4e14cb6aaf1",
+          "ui": "container",
+          "layout": "vertical",
+          "c": [
+            {
+              "id": "x1tkf1iah1",
+              "bindPath": "street",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Улица",
+                  "vn": "Улица",
+                  "en": "Улица"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Улица",
+                  "vn": "Улица",
+                  "en": "Улица"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": [
+                {
+                  "valid": {
+                    "type": "required"
+                  },
+                  "error": {
+                    "type": "i18n",
+                    "i18n": {
+                      "ru": "поле обязательное для заполнения!",
+                      "vn": "поле обязательное для заполнения!",
+                      "en": "поле обязательное для заполнения!"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ek271grek1",
+              "bindPath": "home",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Дом",
+                  "vn": "Дом",
+                  "en": "Дом"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Дом",
+                  "vn": "Дом",
+                  "en": "Дом"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "34234fsf-43fghds7s-32hrfnes1",
+      "ui": "container",
+      "layout": "vertical",
+      "c": [
+        {
+          "id": "dee6e4d1-70b7-42de-9038-2facf640ce241",
+          "ui": "container",
+          "layout": "horizontal",
+          "c": [
+            {
+              "id": "n79oqxswd1",
+              "bindPath": "registration",
+              "ui": "check",
+              "subType": "checkbox",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Совпадает с адресом фактического проживания",
+                  "vn": "Совпадает с адресом фактического проживания",
+                  "en": "Совпадает с адресом фактического проживания"
+                }
+              },
+              "validations": []
+            }
+          ]
+        },
+        {
+          "id": "190404ea-890f-4b89-b226-e0253e0692751",
+          "ui": "container",
+          "layout": "vertical",
+          "c": [
+            {
+              "id": "ircbblxkg1",
+              "bindPath": "country",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Страна",
+                  "vn": "Страна",
+                  "en": "Страна"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Страна3",
+                  "vn": "Страна",
+                  "en": "Страна"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": [
+                {
+                  "valid": {
+                    "type": "required"
+                  },
+                  "error": {
+                    "type": "i18n",
+                    "i18n": {
+                      "ru": "поле обязательное для заполнения!",
+                      "vn": "поле обязательное для заполнения!",
+                      "en": "поле обязательное для заполнения!"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "jqajitjuc1",
+              "bindPath": "city",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "value": {
+                "type": "value",
+                "ref": "ircbblxkg"
+              },
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Город",
+                  "vn": "Город",
+                  "en": "Город"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Город",
+                  "vn": "Город",
+                  "en": "Город"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": [
+                {
+                  "valid": {
+                    "type": "required"
+                  },
+                  "error": {
+                    "type": "i18n",
+                    "i18n": {
+                      "ru": "поле обязательное для заполнения!",
+                      "vn": "поле обязательное для заполнения!",
+                      "en": "поле обязательное для заполнения!"
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "a552db82-d51b-4f2f-a724-3e4e14cb6aaf1",
+          "ui": "container",
+          "layout": "vertical",
+          "c": [
+            {
+              "id": "x1tkf1iah1",
+              "bindPath": "street",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
+                        },
+                        "other": {
+                          "type": "const",
+                          "value": "true"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "label": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Улица",
+                  "vn": "Улица",
+                  "en": "Улица"
+                }
+              },
+              "placeholder": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "Улица",
+                  "vn": "Улица",
+                  "en": "Улица"
+                }
+              },
+              "help": {
+                "type": "i18n",
+                "i18n": {
+                  "ru": "укажите точно как в паспорте",
+                  "vn": "укажите точно как в паспорте",
+                  "en": "укажите точно как в паспорте"
+                }
+              },
+              "validations": [
+                {
+                  "valid": {
+                    "type": "required"
+                  },
+                  "error": {
+                    "type": "i18n",
+                    "i18n": {
+                      "ru": "поле обязательное для заполнения!",
+                      "vn": "поле обязательное для заполнения!",
+                      "en": "поле обязательное для заполнения!"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "id": "ek271grek1",
+              "bindPath": "home",
+              "ui": "input",
+              "subType": "text",
+              "about": "",
+              "defaultValue": "",
+              "mask": "",
+              "prefix": "",
+              "suffix": "",
+              "hidden": {
+                "type": "and",
+                "values": [
+                  {
+                    "type": "and",
+                    "values": [
+                      {
+                        "type": "eq",
+                        "value": {
+                          "type": "value",
+                          "ref": "n79oqxswd1"
                         },
                         "other": {
                           "type": "const",

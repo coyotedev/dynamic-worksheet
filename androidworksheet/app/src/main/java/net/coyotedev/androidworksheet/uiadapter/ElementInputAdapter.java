@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import dynamicworksheet.element.ElementInput;
 import dynamicworksheet.element.IElement;
@@ -24,13 +23,11 @@ public class ElementInputAdapter implements IElementAdapter {
         input.setValidationHandler(new IValidation.ValidationHandler() {
             @Override
             public void onPassed() {
-//                Toast.makeText(ctx, "PASSED", Toast.LENGTH_SHORT).show();
                 ret.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_green_light));
             }
 
             @Override
             public void onError(String error) {
-//                Toast.makeText(ctx, error, Toast.LENGTH_SHORT).show();
                 ret.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_red_light));
             }
         });
@@ -69,7 +66,6 @@ public class ElementInputAdapter implements IElementAdapter {
                 }
             });
         }
-
         return ret;
     }
 }

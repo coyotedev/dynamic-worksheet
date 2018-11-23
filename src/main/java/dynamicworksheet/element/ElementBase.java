@@ -17,6 +17,7 @@ import dynamicworksheet.validation.ValidationMinLength;
 import dynamicworksheet.validation.ValidationRequired;
 import dynamicworksheet.validation.ValidationUpload;
 import io.reactivex.annotations.Nullable;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public abstract class ElementBase<T> implements IElement<T> {
     private Adapter mRUIAdapter;
     private IValidation.ValidationHandler mValidationHandler;
     private List<IElement> mChildren = new ArrayList<>();
+    protected List<Disposable> mAdapterSubscribes = new ArrayList<>();
 
     ElementBase(@Nullable IElement root) {
         mRoot = root;
@@ -90,20 +92,35 @@ public abstract class ElementBase<T> implements IElement<T> {
 
     @Override
     public void setAdapter(Adapter adapter) {
+        // отписываем предыдущих подписантов, чтобы они больше не задерживали предыдущий адаптер в памяти
+        for (Disposable it : mAdapterSubscribes) {
+            it.dispose();
+        }
+        mAdapterSubscribes.clear();
         mRUIAdapter = adapter;
         if (mHidden != null) {
-            mHidden.getObservable().subscribe(new Consumer<Boolean>() {
+            mAdapterSubscribes.add(mHidden.getObservable().subscribe(new Consumer<Boolean>() {
                 @Override
                 public void accept(Boolean hidden) throws Exception {
-                    mRUIAdapter.onInteract(new MessageInteractHiddenChanged(hidden));
+                    adapter.onInteract(new MessageInteractHiddenChanged(hidden));
                 }
-            });
+            }));
         }
+    }
+
+    @Override
+    public Adapter getAdapter() {
+        return mRUIAdapter;
     }
 
     @Override
     public void setValidationHandler(IValidation.ValidationHandler handler) {
         mValidationHandler = handler;
+    }
+
+    @Override
+    public IValidation.ValidationHandler getValidationHandler() {
+        return mValidationHandler;
     }
 
     @Override

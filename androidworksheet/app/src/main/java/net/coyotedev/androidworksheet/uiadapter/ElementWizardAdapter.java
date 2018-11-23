@@ -17,39 +17,44 @@ import java.util.List;
 
 import dynamicworksheet.element.ElementWizard;
 import dynamicworksheet.element.IElement;
+import dynamicworksheet.message.interact.MessageInteract;
+import dynamicworksheet.message.interact.MessageInteractPageChangeRequest;
+import dynamicworksheet.message.interact.MessageInteractPageChanged;
+import dynamicworksheet.type.Direction;
+import dynamicworksheet.util.mutablevalue.MutableValue;
+import dynamicworksheet.validation.IValidation;
 
 public class ElementWizardAdapter implements IElementAdapter {
     private static final boolean IS_PAGER_SCROLL_SMOOTH = true;
 
-    private List<IElement> addValidations(List<IElement> list, IElement element) {
-        list.add(element);
-        for (int i = 0; i < element.getChildren().size(); ++i) {
-            addValidations(list, (IElement) element.getChildren().get(i));
-        }
-        return list;
-    }
-
     @Override
-    public View build(final IElement element, ViewGroup root, final Context ctx) {
+    public View build(final IElement element, final ViewGroup root, final Context ctx) {
         final View ret = LayoutInflater.from(ctx).inflate(R.layout.v_wizard, null, false);
         final ViewPager pager = ret.findViewById(R.id.id_wizard_pager);
-        Button buttonPrev = ret.findViewById(R.id.id_wizard_button_prev);
-        Button buttonNext = ret.findViewById(R.id.id_wizard_button_next);
+        final Button buttonPrev = ret.findViewById(R.id.id_wizard_button_prev);
+        final Button buttonNext = ret.findViewById(R.id.id_wizard_button_next);
         final ElementWizard wizard = (ElementWizard) element;
+        final List<View> pages = new ArrayList<>();
+        final MutableValue<Direction> direction = new MutableValue<>(Direction.Static);
 
         // pager setup
         {
-            // страницы здесь - это вьюхи внутри визарда (как контейнеры, так и не объединённые вьюхи)
-            final List<View> pages = new ArrayList<>();
-            for (IElement it : wizard.getChildren()) {
-                pages.add(ElementAdapter.getInstance().build(it, root, ctx));
-            }
+            // отключаем возможность свайпать страницы
+            pager.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    return true;
+                }
+            });
+
             pager.setAdapter(new PagerAdapter() {
                 @NonNull
                 @Override
                 public Object instantiateItem(@NonNull ViewGroup container, int position) {
                     View ret = pages.get(position);
-                    container.addView(ret);
+                    if (ret.getParent() != container) {
+                        container.addView(ret);
+                    }
                     return ret;
                 }
 
@@ -67,11 +72,50 @@ public class ElementWizardAdapter implements IElementAdapter {
                 public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
                     return view == o;
                 }
-            });
-            pager.setOnTouchListener(new View.OnTouchListener() {
+
                 @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    return true;
+                public int getItemPosition(@NonNull Object object) {
+                    int index = pages.indexOf(object);
+                    if (index == -1) {
+                        return POSITION_NONE;
+                    } else {
+                        return index;
+                    }
+                }
+            });
+
+            pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                int scrollPosition = 0;
+
+                @Override
+                public void onPageScrolled(int i, float v, int i1) {
+                    scrollPosition = i;
+                }
+
+                @Override
+                public void onPageSelected(int i) {
+
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int i) {
+                    if (i == ViewPager.SCROLL_STATE_IDLE) {
+                        PagerAdapter adapter = pager.getAdapter();
+                        if (scrollPosition == 0) {
+                            if (adapter != null) {
+                                pages.remove(1);
+                                adapter.notifyDataSetChanged();
+                            }
+                            buttonPrev.setEnabled(true);
+                        }
+                        if (scrollPosition == 1) {
+                            if (adapter != null) {
+                                pages.remove(0);
+                                adapter.notifyDataSetChanged();
+                            }
+                            buttonNext.setEnabled(true);
+                        }
+                    }
                 }
             });
         }
@@ -82,19 +126,8 @@ public class ElementWizardAdapter implements IElementAdapter {
             buttonPrev.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int curIdx = pager.getCurrentItem();
-                    IElement curElement = wizard.getChildren().get(curIdx);
-                    List<IElement> validations = new ArrayList<>();
-                    addValidations(validations, curElement);
-                    boolean valid = true;
-                    for (IElement it : validations) {
-                        valid &= it.checkValid();
-                    }
-                    if (valid) {
-                        if (curIdx > 0) {
-                            pager.setCurrentItem(--curIdx, IS_PAGER_SCROLL_SMOOTH);
-                        }
-                    }
+                    direction.setValue(Direction.Prev);
+                    wizard.onInteract(new MessageInteractPageChangeRequest(Direction.Prev));
                 }
             });
 
@@ -102,29 +135,70 @@ public class ElementWizardAdapter implements IElementAdapter {
             buttonNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    int curIdx = pager.getCurrentItem();
-                    IElement curElement = wizard.getChildren().get(curIdx);
-                    List<IElement> validations = new ArrayList<>();
-                    addValidations(validations, curElement);
-                    boolean valid = true;
-                    for (IElement it : validations) {
-                        valid &= it.checkValid();
-                    }
-                    if (valid) {
-                        PagerAdapter adapter = pager.getAdapter();
-                        if (adapter != null) {
-                            if (curIdx < adapter.getCount()) {
-                                pager.setCurrentItem(++curIdx, IS_PAGER_SCROLL_SMOOTH);
-                            }
-                        }
-                    }
+                    direction.setValue(Direction.Next);
+                    wizard.onInteract(new MessageInteractPageChangeRequest(Direction.Next));
                 }
             });
         }
 
         // core ui connection setup
         {
-            element.setAdapter(new AdapterBase(ret));
+            element.setAdapter(new AdapterBase(ret) {
+                @Override
+                public void onInteract(MessageInteract message) {
+                    super.onInteract(message);
+                    if (message.getClass().isAssignableFrom(MessageInteractPageChanged.class)) {
+                        MessageInteractPageChanged msg = (MessageInteractPageChanged) message;
+                        PagerAdapter adapter = pager.getAdapter();
+                        switch (msg.mPage.mDirection) {
+                            case Prev: {
+                                if (adapter != null) {
+                                    pages.add(0, ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
+                                    adapter.notifyDataSetChanged();
+                                    pager.setCurrentItem(0, IS_PAGER_SCROLL_SMOOTH);
+                                }
+                                buttonNext.setEnabled(true);
+                                break;
+                            }
+                            case Next: {
+                                if (adapter != null) {
+                                    pages.add(ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
+                                    adapter.notifyDataSetChanged();
+                                    pager.setCurrentItem(1, IS_PAGER_SCROLL_SMOOTH);
+                                }
+                                buttonPrev.setEnabled(true);
+                                break;
+                            }
+                            case Static: {
+                                // initial (first) page adding
+                                if (adapter != null) {
+                                    pages.add(ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
+                                    adapter.notifyDataSetChanged();
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            });
+            element.setValidationHandler(new IValidation.ValidationHandler() {
+                @Override
+                public void onPassed() {
+                    switch (direction.getValue()) {
+                        case Prev:
+                            buttonPrev.setEnabled(false);
+                            break;
+                        case Next:
+                            buttonNext.setEnabled(false);
+                            break;
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+
+                }
+            });
         }
 
         return ret;
