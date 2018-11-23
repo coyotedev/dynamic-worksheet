@@ -50,7 +50,7 @@ public class ElementInput extends ElementBase<String> {
         mAdapterSubscribes.add(getValue().getObservable().subscribe(new Consumer<String>() {
             @Override
             public void accept(String text) throws Exception {
-                adapter.onInteract(new MessageInteractTextChanged(text));
+                getAdapter().onInteract(new MessageInteractTextChanged(text));
             }
         }));
     }

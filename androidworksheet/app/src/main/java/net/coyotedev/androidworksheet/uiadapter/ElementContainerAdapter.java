@@ -26,9 +26,11 @@ public class ElementContainerAdapter implements IElementAdapter {
         }
         List<IElement> children = element.getChildren();
         for (int i = 0; i < children.size(); ++i) {
-            View v = ElementAdapter.getInstance().build(children.get(i), root, ctx);
-            v.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
-            ret.addView(v);
+            if (children.get(i) != null) {
+                View v = ElementAdapter.getInstance().build(children.get(i), root, ctx);
+                v.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+                ret.addView(v);
+            }
         }
         return ret;
     }

@@ -28,6 +28,9 @@ public class ElementSearcher {
     }
 
     private IElement searchChildren(IElement node, String id) {
+        if (node == null) {
+            return null;
+        }
         if (mFullySearchedNodes.contains(node)) {
             return null;
         }
