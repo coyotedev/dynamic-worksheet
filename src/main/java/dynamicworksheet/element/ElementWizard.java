@@ -68,12 +68,12 @@ public class ElementWizard extends ElementContainer {
                 return;
             }
             MessageInteractPageChangeRequest msg = (MessageInteractPageChangeRequest) message;
-            List<IElement> validations = new ArrayList<>();
-            addValidations(validations, ((PageBundle) getValue().getValue()).mPage);
             boolean valid = true;
-            for (IElement it : validations) {
-                valid &= it.checkValid();
-            }
+//            List<IElement> validations = new ArrayList<>();
+//            addValidations(validations, ((PageBundle) getValue().getValue()).mPage);
+//            for (IElement it : validations) {
+//                valid &= it.checkValid();
+//            }
             IValidation.ValidationHandler validHandler = getValidationHandler();
             if (valid) {
                 if (validHandler != null) {
