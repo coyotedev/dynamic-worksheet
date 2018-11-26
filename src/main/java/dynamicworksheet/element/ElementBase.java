@@ -38,7 +38,7 @@ public abstract class ElementBase<T> implements IElement<T> {
     private List<IElement> mChildren = new ArrayList<>();
     protected List<Disposable> mAdapterSubscribes = new ArrayList<>();
 
-    ElementBase(@Nullable IElement root) {
+    protected ElementBase(@Nullable IElement root) {
         mRoot = root;
         if (mRoot != null) {
             mRoot.addChild(this);
@@ -146,14 +146,16 @@ public abstract class ElementBase<T> implements IElement<T> {
         mValidations = new ArrayList<>();
         for (JsonDummyValidation it : validations) {
             Class<? extends IJsonDummyValidationCase> clazzCase = it.mValid.getClass();
-            Class<? extends IJsonDummyValue> clazzError = it.mError.getClass();
 
-            String error = null;
-            if (clazzError.isAssignableFrom(JsonDummyValueConst.class)) {
-                error = ((JsonDummyValueConst) it.mError).mValue;
-            } else if (clazzError.isAssignableFrom(JsonDummyValuei18n.class)) {
-                error = ((JsonDummyValuei18n) it.mError).mValue.getMappedValue().get(Locale.getDefault().getLanguage());
-            } // TODO: add others
+            String error = "";
+            if (it.mError != null) {
+                Class<? extends IJsonDummyValue> clazzError = it.mError.getClass();
+                if (clazzError.isAssignableFrom(JsonDummyValueConst.class)) {
+                    error = ((JsonDummyValueConst) it.mError).mValue;
+                } else if (clazzError.isAssignableFrom(JsonDummyValuei18n.class)) {
+                    error = ((JsonDummyValuei18n) it.mError).mValue.getMappedValue().get(Locale.getDefault().getLanguage());
+                } // TODO: add others
+            }
 
             if (clazzCase.isAssignableFrom(JsonDummyValidationCaseRequired.class)) {
                 mValidations.add(new ValidationRequired(getValue(), error));

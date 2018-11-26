@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import dynamicworksheet.element.ElementRadioGroup;
+import dynamicworksheet.element.ElementSelectable.ElementRadioGroup;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.message.interact.MessageInteract;
 import dynamicworksheet.message.interact.MessageInteractSelectedChanged;

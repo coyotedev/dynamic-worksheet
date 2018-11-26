@@ -1,23 +1,23 @@
-package dynamicworksheet.element;
+package dynamicworksheet.element.ElementSelectable;
 
 import java.util.List;
 
 import dynamicworksheet.Value.IValue;
+import dynamicworksheet.element.ElementBase;
+import dynamicworksheet.element.IElement;
 import dynamicworksheet.message.interact.MessageInteract;
 import dynamicworksheet.message.interact.MessageInteractSelectedChanged;
 import dynamicworksheet.message.interact.MessageInteractTextChanged;
 import dynamicworksheet.option.Option;
-import dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.functions.Consumer;
 
-public class ElementRadioGroup extends ElementBase<String> {
+public abstract class ElementSelectableBase extends ElementBase<String> {
     private IValue<String> mLabel;
     private List<Option> mOptions;
 
-    public ElementRadioGroup(@Nullable IElement root, IValue<String> value) {
+    ElementSelectableBase(@Nullable IElement root, IValue<String> value) {
         super(root);
-        mType = UIType.RadioGroup;
         setValue(value);
     }
 

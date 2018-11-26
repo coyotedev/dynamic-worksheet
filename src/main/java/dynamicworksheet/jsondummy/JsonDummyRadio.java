@@ -4,7 +4,8 @@ import com.google.gson.annotations.SerializedName;
 
 import dynamicworksheet.Value.ValueSimple;
 import dynamicworksheet.element.ElementBase;
-import dynamicworksheet.element.ElementRadioGroup;
+import dynamicworksheet.element.ElementSelectable.ElementRadioGroup;
+import dynamicworksheet.element.ElementSelectable.ElementSelectableBase;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.option.JsonDummyOption;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
@@ -47,7 +48,7 @@ public class JsonDummyRadio extends JsonDummyBase {
     @Override
     protected void set(ElementBase element) {
         super.set(element);
-        ElementRadioGroup casted = (ElementRadioGroup) element;
+        ElementSelectableBase casted = (ElementSelectableBase) element;
         if (mOptions != null && !mOptions.isEmpty()) {
             List<Option> options = new ArrayList<>();
             for (JsonDummyOption it : mOptions) {

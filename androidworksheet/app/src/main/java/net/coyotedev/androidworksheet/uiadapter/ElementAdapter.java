@@ -35,6 +35,10 @@ public class ElementAdapter implements IElementAdapter {
                 return new ElementTextAdapter().build(element, root, ctx);
             case RadioGroup:
                 return new ElementRadioGroupAdapter().build(element, root, ctx);
+            case Select:
+                return new ElementSelectAdapter().build(element, root, ctx);
+            case ImageView:
+                return new ElementImageUrlAdapter().build(element, root, ctx);
         }
         return null;
     }
