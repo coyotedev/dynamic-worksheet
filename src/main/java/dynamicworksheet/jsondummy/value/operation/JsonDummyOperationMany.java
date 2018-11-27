@@ -1,8 +1,8 @@
 package dynamicworksheet.jsondummy.value.operation;
 
 import com.google.gson.annotations.SerializedName;
-import dynamicworksheet.Value.IValue;
-import dynamicworksheet.Value.ValueLogicalOperation;
+import dynamicworksheet.value.IValue;
+import dynamicworksheet.value.ValueLogicalOperation;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
 

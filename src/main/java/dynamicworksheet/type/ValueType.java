@@ -2,6 +2,9 @@ package dynamicworksheet.type;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Тип ValueSource
+ */
 public enum ValueType {
     @SerializedName("const")
     Const,

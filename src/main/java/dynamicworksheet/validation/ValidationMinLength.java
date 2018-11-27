@@ -1,7 +1,10 @@
 package dynamicworksheet.validation;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 
+/**
+ * Валидация по минимальной длине строки
+ */
 public class ValidationMinLength extends ValidationBase {
     private final IValue<String> mValue;
     private final Integer mMinLength;

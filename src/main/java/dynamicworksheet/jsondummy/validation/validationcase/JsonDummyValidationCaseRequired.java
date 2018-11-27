@@ -1,6 +1,6 @@
 package dynamicworksheet.jsondummy.validation.validationcase;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.validation.ValidationRequired;
 

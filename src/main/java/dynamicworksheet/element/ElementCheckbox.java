@@ -1,6 +1,6 @@
 package dynamicworksheet.element;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 import dynamicworksheet.message.interact.MessageInteract;
 import dynamicworksheet.message.interact.MessageInteractCheckedChanged;
 import dynamicworksheet.type.UIType;

@@ -1,8 +1,10 @@
 package dynamicworksheet.validation;
 
-import dynamicworksheet.Value.IValue;
-import dynamicworksheet.Value.ValueSimple;
+import dynamicworksheet.value.ValueSimple;
 
+/**
+ * Базовый класс для всех валидаций
+ */
 public abstract class ValidationBase extends ValueSimple<Boolean> implements IValidation {
 
     private final String mError;

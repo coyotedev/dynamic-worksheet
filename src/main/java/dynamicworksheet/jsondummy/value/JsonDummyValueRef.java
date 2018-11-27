@@ -1,8 +1,8 @@
 package dynamicworksheet.jsondummy.value;
 
 import com.google.gson.annotations.SerializedName;
-import dynamicworksheet.Value.IValue;
-import dynamicworksheet.Value.ValueReference;
+import dynamicworksheet.value.IValue;
+import dynamicworksheet.value.ValueReference;
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.util.ElementSearcher;
 

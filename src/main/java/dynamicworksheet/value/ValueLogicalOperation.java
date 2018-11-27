@@ -1,4 +1,4 @@
-package dynamicworksheet.Value;
+package dynamicworksheet.value;
 
 import dynamicworksheet.type.OperationsType;
 import io.reactivex.functions.Consumer;
@@ -6,20 +6,21 @@ import io.reactivex.functions.Consumer;
 import java.util.List;
 
 /**
- * Value source - логическая операция
- * Значение считается в конструкторе и каждый раз при изменении значений операндов
+ * ValueSource - логическая операция
+ * Представляет значение, вычисленное по всем операндам
+ * Значение обновляется в конструкторе и каждый раз при изменении значений операндов
  */
-public class ValueLogicalOperation extends ValueSimple<Boolean> {
+public class ValueLogicalOperation extends dynamicworksheet.value.ValueSimple<Boolean> {
     private OperationsType mType;
-    private List<IValue<Boolean>> mOperands;
+    private List<dynamicworksheet.value.IValue<Boolean>> mOperands;
 
-    public ValueLogicalOperation(OperationsType type, List<IValue<Boolean>> operands) throws IllegalArgumentException {
+    public ValueLogicalOperation(OperationsType type, List<dynamicworksheet.value.IValue<Boolean>> operands) throws IllegalArgumentException {
         if (type == OperationsType.Undefined) {
             throw new IllegalArgumentException("Cannot create operation: " + type);
         }
         mType = type;
         mOperands = operands;
-        for (IValue it : operands) {
+        for (dynamicworksheet.value.IValue it : operands) {
             it.getObservable().subscribe(new Consumer() {
                 @Override
                 public void accept(Object o) throws IllegalArgumentException {
@@ -33,7 +34,7 @@ public class ValueLogicalOperation extends ValueSimple<Boolean> {
         switch (mType) {
             case And: {
                 boolean ret = true;
-                for (IValue<Boolean> it : mOperands) {
+                for (dynamicworksheet.value.IValue<Boolean> it : mOperands) {
                     ret &= it.getValue();
                 }
                 setValue(ret);
@@ -41,7 +42,7 @@ public class ValueLogicalOperation extends ValueSimple<Boolean> {
             }
             case Or: {
                 boolean ret = false;
-                for (IValue<Boolean> it : mOperands) {
+                for (dynamicworksheet.value.IValue<Boolean> it : mOperands) {
                     ret |= it.getValue();
                 }
                 setValue(ret);
@@ -64,7 +65,7 @@ public class ValueLogicalOperation extends ValueSimple<Boolean> {
             }
             case Not: {
                 boolean ret = true;
-                for (IValue<Boolean> it : mOperands) {
+                for (dynamicworksheet.value.IValue<Boolean> it : mOperands) {
                     ret &= it.getValue();
                 }
                 setValue(!ret);

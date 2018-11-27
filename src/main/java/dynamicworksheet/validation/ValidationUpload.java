@@ -1,11 +1,14 @@
 package dynamicworksheet.validation;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Валидация по параметрам загруженного файла
+ */
 public class ValidationUpload extends ValidationBase {
 
     private static final String REGEX_FILE_SIZE = "(^[0-9]+)(b|[Kk]b|[Mm]b|[Gg]b){1}";

@@ -1,7 +1,13 @@
-package dynamicworksheet.Value;
+package dynamicworksheet.value;
 
 import io.reactivex.subjects.BehaviorSubject;
 
+/**
+ * Базовый ValueSource.
+ * Хранит значение без зависимостей.
+ *
+ * @param <T> {@inheritDoc}
+ */
 public class ValueSimple<T> implements IValue<T> {
 
     private T mValue;
@@ -14,6 +20,10 @@ public class ValueSimple<T> implements IValue<T> {
         setValue(value);
     }
 
+    /**
+     * Сеттер для хранимого значения. Каждый раз при его изменении Observable данного ValueSource'а
+     * будет излучать сигнал с новым значением.
+     */
     @Override
     public void setValue(T value) {
         mValue = value;

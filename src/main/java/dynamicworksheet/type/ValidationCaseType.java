@@ -2,6 +2,9 @@ package dynamicworksheet.type;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Тип валидации
+ */
 public enum ValidationCaseType {
     @SerializedName("required")
     Required,

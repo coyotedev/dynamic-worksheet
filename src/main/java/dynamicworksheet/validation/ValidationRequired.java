@@ -1,7 +1,11 @@
 package dynamicworksheet.validation;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 
+/**
+ * Валидация по наличию (например, совместно с элементом типа Input
+ * {@link dynamicworksheet.element.ElementInput} - валидно, если пользователь осуществил любой ввод)
+ */
 public class ValidationRequired extends ValidationBase {
 
     private final IValue mObject;
@@ -18,6 +22,7 @@ public class ValidationRequired extends ValidationBase {
             if (obj.getClass().isAssignableFrom(String.class)) {
                 return !((String) obj).isEmpty();
             }
+            return true;
         }
         return false;
     }

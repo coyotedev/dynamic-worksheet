@@ -2,6 +2,10 @@ package dynamicworksheet.message.interact;
 
 import dynamicworksheet.type.Direction;
 
+/**
+ * Запрос на изменение текущей страницы (для {@link dynamicworksheet.element.ElementWizard})
+ * Направление сообщения - Real UI -> Core UI
+ */
 public class MessageInteractPageChangeRequest extends MessageInteract {
     public Direction mDirection;
 

@@ -1,7 +1,7 @@
 package dynamicworksheet.jsondummy.value;
 
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 import dynamicworksheet.element.IElement;
 
 public interface IJsonDummyValue {

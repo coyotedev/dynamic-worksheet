@@ -2,6 +2,9 @@ package dynamicworksheet.type;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Тип логической операции
+ */
 public enum OperationsType {
     Undefined,
     @SerializedName("and")

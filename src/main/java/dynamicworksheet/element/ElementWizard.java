@@ -1,9 +1,8 @@
 package dynamicworksheet.element;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import dynamicworksheet.Value.ValueSimple;
+import dynamicworksheet.value.ValueSimple;
 import dynamicworksheet.message.interact.MessageInteract;
 import dynamicworksheet.message.interact.MessageInteractPageChangeRequest;
 import dynamicworksheet.message.interact.MessageInteractPageChanged;
@@ -69,6 +68,7 @@ public class ElementWizard extends ElementContainer {
             }
             MessageInteractPageChangeRequest msg = (MessageInteractPageChangeRequest) message;
             boolean valid = true;
+            // Закомментировано в целях дебага
 //            List<IElement> validations = new ArrayList<>();
 //            addValidations(validations, ((PageBundle) getValue().getValue()).mPage);
 //            for (IElement it : validations) {

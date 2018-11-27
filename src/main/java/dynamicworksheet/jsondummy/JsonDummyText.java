@@ -2,7 +2,7 @@ package dynamicworksheet.jsondummy;
 
 import com.google.gson.annotations.SerializedName;
 
-import dynamicworksheet.Value.ValueSimple;
+import dynamicworksheet.value.ValueSimple;
 import dynamicworksheet.element.ElementBase;
 import dynamicworksheet.element.ElementText;
 import dynamicworksheet.element.IElement;

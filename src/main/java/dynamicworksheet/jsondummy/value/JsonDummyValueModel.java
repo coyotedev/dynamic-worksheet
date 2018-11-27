@@ -1,7 +1,7 @@
 package dynamicworksheet.jsondummy.value;
 
 import com.google.gson.annotations.SerializedName;
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 import dynamicworksheet.element.IElement;
 
 public class JsonDummyValueModel implements IJsonDummyValue {

@@ -1,5 +1,8 @@
 package dynamicworksheet.message.interact;
 
+/**
+ * Состояние фокуса изменилось
+ */
 public class MessageInteractFocusChanged extends MessageInteract {
     public boolean mIsFocused;
 

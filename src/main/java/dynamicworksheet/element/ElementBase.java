@@ -1,6 +1,6 @@
 package dynamicworksheet.element;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 import dynamicworksheet.jsondummy.validation.JsonDummyValidation;
 import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
 import dynamicworksheet.jsondummy.validation.validationcase.JsonDummyValidationCaseMinLength;
@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Базовый класс наследования для любого элемента.
+ * @param <T> {@inheritDoc}
+ */
 public abstract class ElementBase<T> implements IElement<T> {
 
     protected String mId;
@@ -36,8 +40,18 @@ public abstract class ElementBase<T> implements IElement<T> {
     private Adapter mRUIAdapter;
     private IValidation.ValidationHandler mValidationHandler;
     private List<IElement> mChildren = new ArrayList<>();
+    /**
+     * Список актуальных подписок для адаптера RUI любого из вложенных ValueSource. Необходимо не
+     * забывать очищать от неактуальных подписок при каждой переустановке адаптера, иначе количество
+     * действий на onInteract() будет расти без всякого смысла.
+     */
     protected List<Disposable> mAdapterSubscribes = new ArrayList<>();
 
+    /**
+     * Если указан корень, то добавление элемента в список вложенных для корня будет осуществлено
+     * автоматически.
+     * @param root
+     */
     protected ElementBase(@Nullable IElement root) {
         mRoot = root;
         if (mRoot != null) {

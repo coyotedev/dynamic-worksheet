@@ -1,20 +1,14 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
-import dynamicworksheet.Value.IValue;
-import dynamicworksheet.Value.ValueLogicalOperation;
-import dynamicworksheet.Value.ValueReference;
-import dynamicworksheet.Value.ValueSimple;
-import dynamicworksheet.element.ElementInput;
+
 import dynamicworksheet.element.IElement;
 import dynamicworksheet.jsondummy.IJsonDummy;
 import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
 import dynamicworksheet.jsondummy.value.IJsonDummyValue;
-import dynamicworksheet.type.OperationsType;
 import dynamicworksheet.util.*;
 
 import java.io.FileReader;
-import java.util.ArrayList;
 
 public class MainClass {
     public static void main(String[] args) {

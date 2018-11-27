@@ -1,6 +1,6 @@
 package dynamicworksheet.element;
 
-import dynamicworksheet.Value.IValue;
+import dynamicworksheet.value.IValue;
 import dynamicworksheet.message.interact.MessageInteractTextChanged;
 import dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;

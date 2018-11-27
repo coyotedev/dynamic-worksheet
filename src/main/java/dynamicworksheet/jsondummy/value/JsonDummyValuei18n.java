@@ -1,8 +1,8 @@
 package dynamicworksheet.jsondummy.value;
 
 import com.google.gson.annotations.SerializedName;
-import dynamicworksheet.Value.IValue;
-import dynamicworksheet.Value.ValueI18N;
+import dynamicworksheet.value.IValue;
+import dynamicworksheet.value.ValueI18N;
 import dynamicworksheet.element.IElement;
 
 import java.util.HashMap;

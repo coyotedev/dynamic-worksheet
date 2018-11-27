@@ -2,6 +2,11 @@ package dynamicworksheet.type;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Основной тип элемента, возвращаемый интерфейсом {@link dynamicworksheet.element.IElement}
+ * В данный момент используется также в json-описании, генерируемом сервером
+ * @see dynamicworksheet.jsondummy
+ */
 public enum UIType {
     Undefined,
     @SerializedName("container")

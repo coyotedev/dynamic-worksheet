@@ -1,19 +1,24 @@
-package dynamicworksheet.Value;
+package dynamicworksheet.value;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-public class ValueReference<T> extends ValueSimple<T> {
+/**
+ * ValueSource - ссылка
+ * Представляет прямую зависимость от значения другого ValueSource'а.
+ * @param <T> {@inheritDoc}
+ */
+public class ValueReference<T> extends dynamicworksheet.value.ValueSimple<T> {
 
     private T mDefaultValue;
 
-    public ValueReference(IValue<T> reference, T defaultValue) {
+    public ValueReference(dynamicworksheet.value.IValue<T> reference, T defaultValue) {
         mDefaultValue = defaultValue;
         setValue(mDefaultValue);
         subscribe(reference);
     }
 
-    private void subscribe(IValue<T> reference) {
+    private void subscribe(dynamicworksheet.value.IValue<T> reference) {
         reference.getObservable().subscribe(new Observer<T>() {
             @Override
             public void onSubscribe(Disposable d) {

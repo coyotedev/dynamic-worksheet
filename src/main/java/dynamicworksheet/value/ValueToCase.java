@@ -1,6 +1,9 @@
-package dynamicworksheet.Value;
+package dynamicworksheet.value;
 
-public class ValueToCase extends ValueSimple<String> {
+/**
+ * ValueSource - приведение строки к нижнему или верхнему регистру
+ */
+public class ValueToCase extends dynamicworksheet.value.ValueSimple<String> {
     private Type mType;
 
     public ValueToCase(Type type) throws IllegalArgumentException {
