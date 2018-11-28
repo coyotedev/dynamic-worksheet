@@ -39,6 +39,8 @@ public class ElementAdapter implements IElementAdapter {
                 return new ElementSelectAdapter().build(element, root, ctx);
             case ImageView:
                 return new ElementImageUrlAdapter().build(element, root, ctx);
+            case Date:
+                return new ElementDateAdapter().build(element, root, ctx);
         }
         return null;
     }

@@ -34,38 +34,41 @@ public class ElementInputAdapter implements IElementAdapter {
         ret.setHint(input.getPlaceholder());
 
         // core ui connection setup
-        {
-            element.setAdapter(new AdapterBase(ret) {
-                @Override
-                public void onInteract(MessageInteract message) {
-                    super.onInteract(message);
-                    if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
-                        MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
-                        if (!ret.getText().toString().equals(msg.mText)) {
-                            ret.setText(msg.mText);
-                        }
+        setupCoreConnections(element, ret);
+
+        return ret;
+    }
+
+    protected void setupCoreConnections(final IElement element, final EditText view) {
+        element.setAdapter(new AdapterBase(view) {
+            @Override
+            public void onInteract(MessageInteract message) {
+                super.onInteract(message);
+                if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
+                    MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
+                    if (!view.getText().toString().equals(msg.mText)) {
+                        view.setText(msg.mText);
                     }
                 }
-            });
+            }
+        });
 
-            ret.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    element.onInteract(new MessageInteractTextChanged(charSequence.toString()));
-                }
-                @Override
-                public void afterTextChanged(Editable editable) {}
-            });
+        view.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                element.onInteract(new MessageInteractTextChanged(charSequence.toString()));
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
 
-            ret.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View view, boolean b) {
-                    element.onInteract(new MessageInteractFocusChanged(b));
-                }
-            });
-        }
-        return ret;
+        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                element.onInteract(new MessageInteractFocusChanged(b));
+            }
+        });
     }
 }
