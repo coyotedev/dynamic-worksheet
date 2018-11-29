@@ -178,9 +178,12 @@ public abstract class ElementBase<T> implements IElement<T> {
                     mValidations.add(new ValidationMinLength((IValue<String>) getValue(), ((JsonDummyValidationCaseMinLength) it.mValid).mMinLength, error));
                 }
             } else if (clazzCase.isAssignableFrom(JsonDummyValidationCaseUpload.class)) {
+                if (getValue().getValue() == null) {
+                    return;
+                }
                 JsonDummyValidationCaseUpload jsonDummy = (JsonDummyValidationCaseUpload) it.mValid;
-                if (getValue().getValue().getClass().isAssignableFrom(ValidationUpload.FileParams.class)) {
-                    ValidationUpload.FileParams refParams = new ValidationUpload.FileParams.Builder()
+                if (getValue().getValue().getClass().isAssignableFrom(ValidationUpload.FileRefParams.class)) {
+                    ValidationUpload.FileRefParams refParams = new ValidationUpload.FileRefParams.Builder()
                             .setFileSize(jsonDummy.mMaxSize)
                             .setExtensions(jsonDummy.mExtensions)
                             .setMinWidth(jsonDummy.mMinWidth)

@@ -14,7 +14,7 @@ public interface IElementAdapter {
     class AdapterBase implements IElement.Adapter {
         private final View mView;
 
-        AdapterBase(View view) {
+        protected AdapterBase(View view) {
             mView = view;
         }
 

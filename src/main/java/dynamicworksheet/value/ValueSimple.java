@@ -26,6 +26,9 @@ public class ValueSimple<T> implements IValue<T> {
      */
     @Override
     public void setValue(T value) {
+        if (value == null) {
+            return;
+        }
         mValue = value;
         mObservable.onNext(mValue);
     }

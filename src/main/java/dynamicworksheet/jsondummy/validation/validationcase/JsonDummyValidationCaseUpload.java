@@ -21,7 +21,7 @@ public class JsonDummyValidationCaseUpload implements IJsonDummyValidationCase {
 
     @Override
     public IValue getValue(IElement node) {
-        ValidationUpload.FileParams ref = new ValidationUpload.FileParams.Builder()
+        ValidationUpload.FileRefParams ref = new ValidationUpload.FileRefParams.Builder()
                 .setFileSize(mMaxSize)
                 .setExtensions(mExtensions)
                 .setMinWidth(mMinWidth)

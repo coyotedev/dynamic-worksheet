@@ -27,9 +27,9 @@ public class ValidationUpload extends ValidationBase {
     }};
 
     private final IValue<FileParams> mParams;
-    private final FileParams mReference;
+    private final FileRefParams mReference;
 
-    public ValidationUpload(IValue<FileParams> params, FileParams ref, String error) {
+    public ValidationUpload(IValue<FileParams> params, FileRefParams ref, String error) {
         super(error);
         mParams = params;
         mReference = ref;
@@ -41,12 +41,28 @@ public class ValidationUpload extends ValidationBase {
     }
 
     public static class FileParams {
+        public String mPath;
+        public String mSize;
+        public String mExtensions;
+        public Integer mWidth;
+        public Integer mHeight;
+
+        public FileParams(String path, String size, String ext, int width, int height) {
+            mPath = path;
+            mSize = size;
+            mExtensions = ext;
+            mWidth = width;
+            mHeight = height;
+        }
+    }
+
+    public static class FileRefParams {
         private String mSize;
         private String mExtensions;
         private Integer mMinWidth, mMaxWidth;
         private Integer mMinHeight, mMaxHeight;
 
-        private FileParams(Builder builder) throws IllegalArgumentException {
+        private FileRefParams(Builder builder) throws IllegalArgumentException {
             mSize = builder.mMaxSize;
             mExtensions = builder.mExtensions;
             mMinWidth = builder.mMinWidth;
@@ -82,6 +98,10 @@ public class ValidationUpload extends ValidationBase {
                 if (!mExtensions.contains(it)) {
                     return false;
                 }
+            }
+            if ((other.mWidth < mMinWidth && other.mWidth > mMaxWidth) ||
+                    (other.mHeight < mMinHeight && other.mHeight > mMaxHeight)) {
+                return false;
             }
 
             return true;
@@ -153,8 +173,8 @@ public class ValidationUpload extends ValidationBase {
                 return this;
             }
 
-            public FileParams build() throws IllegalArgumentException {
-                return new FileParams(this);
+            public FileRefParams build() throws IllegalArgumentException {
+                return new FileRefParams(this);
             }
         }
     }

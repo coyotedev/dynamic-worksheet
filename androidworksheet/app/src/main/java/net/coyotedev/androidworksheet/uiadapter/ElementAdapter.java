@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.coyotedev.androidworksheet.uiadapter.elementfileupload.ElementFileUploadAdapter;
+
 import dynamicworksheet.element.IElement;
 
 public class ElementAdapter implements IElementAdapter {
@@ -41,6 +43,8 @@ public class ElementAdapter implements IElementAdapter {
                 return new ElementImageUrlAdapter().build(element, root, ctx);
             case Date:
                 return new ElementDateAdapter().build(element, root, ctx);
+            case FileUpload:
+                return new ElementFileUploadAdapter().build(element, root, ctx);
         }
         return null;
     }
