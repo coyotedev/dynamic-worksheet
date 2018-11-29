@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ScrollView;
 
 import net.coyotedev.androidworksheet.R;
 
@@ -29,7 +30,7 @@ public class ElementWizardAdapter implements IElementAdapter {
 
     @Override
     public View build(final IElement element, final ViewGroup root, final Context ctx) {
-        final View ret = LayoutInflater.from(ctx).inflate(R.layout.v_wizard, null, false);
+        final View ret = LayoutInflater.from(ctx).inflate(R.layout.v_wizard, root, false);
         final ViewPager pager = ret.findViewById(R.id.id_wizard_pager);
         final Button buttonPrev = ret.findViewById(R.id.id_wizard_button_prev);
         final Button buttonNext = ret.findViewById(R.id.id_wizard_button_next);
@@ -51,11 +52,11 @@ public class ElementWizardAdapter implements IElementAdapter {
                 @NonNull
                 @Override
                 public Object instantiateItem(@NonNull ViewGroup container, int position) {
-                    View ret = pages.get(position);
-                    if (ret.getParent() != container) {
-                        container.addView(ret);
+                    View page = pages.get(position);
+                    if (page.getParent() != container) {
+                        container.addView(page);
                     }
-                    return ret;
+                    return page;
                 }
 
                 @Override
@@ -150,10 +151,14 @@ public class ElementWizardAdapter implements IElementAdapter {
                     if (message.getClass().isAssignableFrom(MessageInteractPageChanged.class)) {
                         MessageInteractPageChanged msg = (MessageInteractPageChanged) message;
                         PagerAdapter adapter = pager.getAdapter();
+
+                        ScrollView scr = new ScrollView(ctx);
+                        scr.setFillViewport(true);
+                        scr.addView(ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
                         switch (msg.mPage.mDirection) {
                             case Prev: {
                                 if (adapter != null) {
-                                    pages.add(0, ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
+                                    pages.add(0, scr);
                                     adapter.notifyDataSetChanged();
                                     pager.setCurrentItem(0, IS_PAGER_SCROLL_SMOOTH);
                                 }
@@ -162,7 +167,7 @@ public class ElementWizardAdapter implements IElementAdapter {
                             }
                             case Next: {
                                 if (adapter != null) {
-                                    pages.add(ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
+                                    pages.add(scr);
                                     adapter.notifyDataSetChanged();
                                     pager.setCurrentItem(1, IS_PAGER_SCROLL_SMOOTH);
                                 }
@@ -172,7 +177,7 @@ public class ElementWizardAdapter implements IElementAdapter {
                             case Static: {
                                 // initial (first) page adding
                                 if (adapter != null) {
-                                    pages.add(ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
+                                    pages.add(scr);
                                     adapter.notifyDataSetChanged();
                                 }
                                 break;
