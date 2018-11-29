@@ -22,6 +22,7 @@ public class ElementDateAdapter extends ElementInputAdapter {
         final ElementDate date = (ElementDate) element;
         ret.setFocusable(false);
         ret.setHint(date.getPlaceholder());
+        ret.setLongClickable(false);
 
         if (ctx instanceof AppCompatActivity) {
             AppCompatActivity activity = (AppCompatActivity) ctx;
