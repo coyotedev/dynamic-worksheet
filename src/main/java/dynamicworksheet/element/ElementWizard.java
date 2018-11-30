@@ -15,12 +15,20 @@ import io.reactivex.functions.Consumer;
 public class ElementWizard extends ElementContainer {
 
     public class PageBundle {
-        public IElement mPage;
-        public Direction mDirection;
+        private IElement mPage;
+        private Direction mDirection;
 
         public PageBundle(IElement page, Direction direction) {
             mPage = page;
             mDirection = direction;
+        }
+
+        public IElement getPage() {
+            return mPage;
+        }
+
+        public Direction getDirection() {
+            return mDirection;
         }
     }
 
@@ -79,7 +87,7 @@ public class ElementWizard extends ElementContainer {
                 if (validHandler != null) {
                     validHandler.onPassed();
                 }
-                switch (msg.mDirection) {
+                switch (msg.getDirection()) {
                     case Prev:
                         if (curIdx > 0) {
                             getValue().setValue(new PageBundle(children.get(--curIdx), Direction.Prev));

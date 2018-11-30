@@ -7,9 +7,13 @@ import dynamicworksheet.type.Direction;
  * Направление сообщения - Real UI -> Core UI
  */
 public class MessageInteractPageChangeRequest extends MessageInteract {
-    public Direction mDirection;
+    private Direction mDirection;
 
     public MessageInteractPageChangeRequest(Direction direction) {
         mDirection = direction;
+    }
+
+    public Direction getDirection() {
+        return mDirection;
     }
 }

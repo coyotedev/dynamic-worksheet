@@ -38,8 +38,8 @@ public class ElementRadioGroupAdapter implements IElementAdapter {
         for (int i = 0; i < options.size(); ++i) {
             RadioButton button = new RadioButton(ctx);
             Option option = options.get(i);
-            button.setTag(option.mValue);
-            button.setText(option.mLabel);
+            button.setTag(option.getValue());
+            button.setText(option.getLabel());
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -58,11 +58,11 @@ public class ElementRadioGroupAdapter implements IElementAdapter {
                     super.onInteract(message);
                     if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
                         MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
-                        title.setText(msg.mText);
+                        title.setText(msg.getText());
                     } else if (message.getClass().isAssignableFrom(MessageInteractSelectedChanged.class)) {
                         MessageInteractSelectedChanged msg = (MessageInteractSelectedChanged) message;
                         for (RadioButton it : buttons) {
-                            if (it.getTag().equals(msg.mTag)) {
+                            if (it.getTag().equals(msg.getTag())) {
                                 it.setChecked(true);
                             }
                         }

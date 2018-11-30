@@ -6,7 +6,7 @@ import io.reactivex.annotations.Nullable;
 
 public class ElementContainer extends ElementBase<Object> {
 
-    protected ContainerLayoutType mLayout = ContainerLayoutType.Horizontal;
+    private ContainerLayoutType mLayout = ContainerLayoutType.Horizontal;
 
     public ElementContainer(@Nullable IElement root) {
         super(root);

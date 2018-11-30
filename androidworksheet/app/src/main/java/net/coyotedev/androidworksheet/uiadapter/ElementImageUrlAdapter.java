@@ -18,8 +18,8 @@ public class ElementImageUrlAdapter implements IElementAdapter {
         ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         ElementImageUrl image = (ElementImageUrl) element;
         ElementImageUrl.Size size = image.getSize();
-        ret.setMinimumWidth(size.mWidth);
-        ret.setMinimumHeight(size.mHeight);
+        ret.setMinimumWidth(size.getWidth());
+        ret.setMinimumHeight(size.getHeight());
         Glide.with(ctx).load(image.getValue().getValue()).into(ret);
         return ret;
     }

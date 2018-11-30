@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private void setup() {
         ViewGroup rootLayout = findViewById(R.id.id_mainlayout);
 
-        List<IElement> views = UIBuilder.parse(UIBuilder.json);
+        List<IElement> views = UIBuilder.parse(UIBuilder.getDefaultJson());
         for (IElement it : views) {
             View v = ElementAdapter.getInstance().build(it, rootLayout, this);
             rootLayout.addView(v);

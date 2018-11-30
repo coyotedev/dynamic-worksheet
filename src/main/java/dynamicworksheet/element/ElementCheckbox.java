@@ -31,7 +31,7 @@ public class ElementCheckbox extends ElementBase<Boolean> {
         Class<? extends MessageInteract> clazz = message.getClass();
         if (clazz.isAssignableFrom(MessageInteractCheckedChanged.class)) {
             MessageInteractCheckedChanged mess = (MessageInteractCheckedChanged) message;
-            getValue().setValue(mess.mIsChecked);
+            getValue().setValue(mess.isChecked());
         }
     }
 

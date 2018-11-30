@@ -3,7 +3,7 @@ package dynamicworksheet.value;
 /**
  * ValueSource - первый символ строки к верхнему регистру
  */
-public class ValueCapitalize extends dynamicworksheet.value.ValueSimple<String> {
+public class ValueCapitalize extends ValueSimple<String> {
 
     @Override
     public void setValue(String value) {

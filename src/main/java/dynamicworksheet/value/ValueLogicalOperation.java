@@ -10,7 +10,7 @@ import java.util.List;
  * Представляет значение, вычисленное по всем операндам
  * Значение обновляется в конструкторе и каждый раз при изменении значений операндов
  */
-public class ValueLogicalOperation extends dynamicworksheet.value.ValueSimple<Boolean> {
+public class ValueLogicalOperation extends ValueSimple<Boolean> {
     private OperationsType mType;
     private List<dynamicworksheet.value.IValue<Boolean>> mOperands;
 

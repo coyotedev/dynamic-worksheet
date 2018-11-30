@@ -3,7 +3,7 @@ package dynamicworksheet.value;
 /**
  * ValueSource - приведение строки к нижнему или верхнему регистру
  */
-public class ValueToCase extends dynamicworksheet.value.ValueSimple<String> {
+public class ValueToCase extends ValueSimple<String> {
     private Type mType;
 
     public ValueToCase(Type type) throws IllegalArgumentException {

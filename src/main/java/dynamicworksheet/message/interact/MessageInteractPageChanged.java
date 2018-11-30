@@ -7,9 +7,13 @@ import dynamicworksheet.element.ElementWizard;
  * Направление сообщения - Core UI -> Real UI
  */
 public class MessageInteractPageChanged extends MessageInteract {
-    public ElementWizard.PageBundle mPage;
+    private ElementWizard.PageBundle mPage;
 
     public MessageInteractPageChanged(ElementWizard.PageBundle page) {
         mPage = page;
+    }
+
+    public ElementWizard.PageBundle getPageBundle() {
+        return mPage;
     }
 }

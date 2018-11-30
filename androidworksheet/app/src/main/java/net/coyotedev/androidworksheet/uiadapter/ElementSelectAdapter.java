@@ -61,7 +61,8 @@ public class ElementSelectAdapter implements IElementAdapter {
 
         int getPositionByTag(String tag) {
             for (int i = 0; i < getCount(); ++i) {
-                if (getItem(i).mValue.equals(tag)) {
+                Option item = getItem(i);
+                if (item != null && item.getValue().equals(tag)) {
                     return i;
                 }
             }
@@ -80,8 +81,8 @@ public class ElementSelectAdapter implements IElementAdapter {
                 Option option = getItem(position);
                 assert (text != null);
                 if (option != null) {
-                    text.setText(option.mLabel);
-                    ret.setTag(option.mValue);
+                    text.setText(option.getLabel());
+                    ret.setTag(option.getValue());
                 }
             } else {
                 text.setText(mTitle);
@@ -122,7 +123,7 @@ public class ElementSelectAdapter implements IElementAdapter {
                 super.onInteract(message);
                 if (message.getClass().isAssignableFrom(MessageInteractSelectedChanged.class)) {
                     MessageInteractSelectedChanged msg = (MessageInteractSelectedChanged) message;
-                    ret.setSelection(adapter.getPositionByTag(msg.mTag));
+                    ret.setSelection(adapter.getPositionByTag(msg.getTag()));
                 }
             }
         });

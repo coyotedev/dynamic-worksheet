@@ -1,10 +1,8 @@
 package net.coyotedev.androidworksheet.uiadapter.elementfileupload;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -122,7 +120,7 @@ public class ElementFileUploadAdapter implements IElementAdapter {
                 super.onInteract(message);
                 if (message.getClass().isAssignableFrom(MessageInteractFileChanged.class)) {
                     MessageInteractFileChanged msg = (MessageInteractFileChanged) message;
-                    image.setImageURI(Uri.fromFile(new File(((MessageInteractFileChanged) message).mParams.mPath)));
+                    image.setImageURI(Uri.fromFile(new File(((MessageInteractFileChanged) message).getParams().mPath)));
                 }
             }
         });

@@ -46,8 +46,9 @@ public class ElementInputAdapter implements IElementAdapter {
                 super.onInteract(message);
                 if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
                     MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
-                    if (!view.getText().toString().equals(msg.mText)) {
-                        view.setText(msg.mText);
+                    String text = msg.getText();
+                    if (!view.getText().toString().equals(text)) {
+                        view.setText(text);
                     }
                 }
             }

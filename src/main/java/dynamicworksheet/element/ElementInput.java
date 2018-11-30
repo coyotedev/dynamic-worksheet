@@ -32,10 +32,10 @@ public class ElementInput extends ElementBase<String> {
         Class<? extends MessageInteract> clazz = message.getClass();
         if (clazz.isAssignableFrom(MessageInteractTextChanged.class)) {
             MessageInteractTextChanged mess = (MessageInteractTextChanged) message;
-            getValue().setValue(mess.mText);
+            getValue().setValue(mess.getText());
         } else if (clazz.isAssignableFrom(MessageInteractFocusChanged.class)) {
             MessageInteractFocusChanged mess = (MessageInteractFocusChanged) message;
-            if (!mess.mIsFocused) {
+            if (!mess.isFocused()) {
                 // check valid on focus lost
                 checkValid();
             } else {

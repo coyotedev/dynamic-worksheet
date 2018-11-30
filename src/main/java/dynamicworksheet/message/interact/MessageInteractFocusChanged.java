@@ -4,9 +4,13 @@ package dynamicworksheet.message.interact;
  * Состояние фокуса изменилось
  */
 public class MessageInteractFocusChanged extends MessageInteract {
-    public boolean mIsFocused;
+    private boolean mIsFocused;
 
     public MessageInteractFocusChanged(boolean isFocused) {
         mIsFocused = isFocused;
+    }
+
+    public boolean isFocused() {
+        return mIsFocused;
     }
 }

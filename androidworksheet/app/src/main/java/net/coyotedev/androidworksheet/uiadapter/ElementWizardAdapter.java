@@ -154,8 +154,8 @@ public class ElementWizardAdapter implements IElementAdapter {
 
                         ScrollView scr = new ScrollView(ctx);
                         scr.setFillViewport(true);
-                        scr.addView(ElementAdapter.getInstance().build(msg.mPage.mPage, root, ctx));
-                        switch (msg.mPage.mDirection) {
+                        scr.addView(ElementAdapter.getInstance().build(msg.getPageBundle().getPage(), root, ctx));
+                        switch (msg.getPageBundle().getDirection()) {
                             case Prev: {
                                 if (adapter != null) {
                                     pages.add(0, scr);

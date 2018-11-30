@@ -22,8 +22,9 @@ public class ElementTextAdapter implements IElementAdapter {
                     super.onInteract(message);
                     if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
                         MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
-                        if (!ret.getText().toString().equals(msg.mText)) {
-                            ret.setText(msg.mText);
+                        String text = msg.getText();
+                        if (!ret.getText().toString().equals(text)) {
+                            ret.setText(text);
                         }
                     }
                 }

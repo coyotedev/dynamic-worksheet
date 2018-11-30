@@ -6,12 +6,20 @@ import io.reactivex.annotations.Nullable;
 
 public class ElementImageUrl extends ElementBase<String> {
     public static class Size {
-        public int mWidth;
-        public int mHeight;
+        private int mWidth;
+        private int mHeight;
 
         public Size(int width, int height) {
             mWidth = width;
             mHeight = height;
+        }
+
+        public int getWidth() {
+            return mWidth;
+        }
+
+        public int getHeight() {
+            return mHeight;
         }
     }
     private Size mSize;

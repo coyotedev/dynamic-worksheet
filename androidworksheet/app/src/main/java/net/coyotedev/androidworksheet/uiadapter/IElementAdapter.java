@@ -22,7 +22,7 @@ public interface IElementAdapter {
         public void onInteract(MessageInteract message) {
             if (message.getClass().isAssignableFrom(MessageInteractHiddenChanged.class)) {
                 MessageInteractHiddenChanged msg = (MessageInteractHiddenChanged) message;
-                int visibility = msg.mHidden ? View.GONE : View.VISIBLE;
+                int visibility = msg.isHidden() ? View.GONE : View.VISIBLE;
                 mView.setVisibility(visibility);
             }
         }

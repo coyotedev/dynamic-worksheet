@@ -8,7 +8,7 @@ import io.reactivex.disposables.Disposable;
  * Представляет прямую зависимость от значения другого ValueSource'а.
  * @param <T> {@inheritDoc}
  */
-public class ValueReference<T> extends dynamicworksheet.value.ValueSimple<T> {
+public class ValueReference<T> extends ValueSimple<T> {
 
     private T mDefaultValue;
 

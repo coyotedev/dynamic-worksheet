@@ -30,7 +30,7 @@ public class ElementFileUpload extends ElementBase<ValidationUpload.FileParams> 
         super.onInteract(message);
         if (message.getClass().isAssignableFrom(MessageInteractFileChanged.class)) {
             MessageInteractFileChanged msg = (MessageInteractFileChanged) message;
-            getValue().setValue(msg.mParams);
+            getValue().setValue(msg.getParams());
         }
     }
 

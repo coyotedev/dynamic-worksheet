@@ -26,7 +26,7 @@ public class ElementCheckboxAdapter implements IElementAdapter {
                     super.onInteract(message);
                     if (message.getClass().isAssignableFrom(MessageInteractCheckedChanged.class)) {
                         MessageInteractCheckedChanged msg = (MessageInteractCheckedChanged) message;
-                        ret.setChecked(msg.mIsChecked);
+                        ret.setChecked(msg.isChecked());
                     }
                 }
             });

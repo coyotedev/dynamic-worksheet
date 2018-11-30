@@ -42,7 +42,7 @@ public abstract class ElementSelectableBase extends ElementBase<String> {
 
     private void select(String tag) {
         for (Option it : mOptions) {
-            if (tag.equals(it.mValue)) {
+            if (tag.equals(it.getValue())) {
                 getValue().setValue(tag);
                 break;
             }
@@ -55,7 +55,7 @@ public abstract class ElementSelectableBase extends ElementBase<String> {
         Class<? extends MessageInteract> clazz = message.getClass();
         if (clazz.isAssignableFrom(MessageInteractSelectedChanged.class)) {
             MessageInteractSelectedChanged msg = (MessageInteractSelectedChanged) message;
-            select(msg.mTag);
+            select(msg.getTag());
         }
     }
 

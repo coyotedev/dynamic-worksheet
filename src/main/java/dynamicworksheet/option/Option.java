@@ -5,11 +5,19 @@ package dynamicworksheet.option;
  * {@link dynamicworksheet.element.ElementSelectable}
  */
 public class Option {
-    public String mLabel;
-    public String mValue;
+    private String mLabel;
+    private String mValue;
 
     public Option(String label, String value) {
         mLabel = label;
         mValue = value;
+    }
+
+    public String getLabel() {
+        return mLabel;
+    }
+
+    public String getValue() {
+        return mValue;
     }
 }
