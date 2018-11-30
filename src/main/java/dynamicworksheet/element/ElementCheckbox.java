@@ -7,6 +7,13 @@ import dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.functions.Consumer;
 
+/**
+ * Элемент - чекбокс с лейблом
+ * Передаваемые сигналы:
+ * - Сигнал об изменении выбранности {@link MessageInteractCheckedChanged}
+ * Получаемые сигналы:
+ * - Сигнал об изменении выбранности {@link MessageInteractCheckedChanged}
+ */
 public class ElementCheckbox extends ElementBase<Boolean> {
 
     private String mLabel;

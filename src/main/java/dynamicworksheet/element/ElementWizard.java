@@ -12,8 +12,20 @@ import dynamicworksheet.validation.IValidation;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.functions.Consumer;
 
+/**
+ * Элемент визард (набор страниц (шагов), объдинённых в один блок с кнопками "назад" и "далее")
+ * Базовое значение - объект типа {@link PageBundle}
+ * Передаваемые сигналы:
+ * - сигнал об изменении актуальной страницы {@link MessageInteractPageChanged}
+ * Получаемые сигналы:
+ * - сигнал об изменении актуальной страницы {@link MessageInteractPageChanged}
+ */
 public class ElementWizard extends ElementContainer {
-
+    /**
+     * Представление действия по изменению актуальной страницы.
+     * Хранит новую страницу и направление изменения {@link Direction} (может быть статичным - это
+     * значит, что страница была просто загружена, а не прокручена.
+     */
     public class PageBundle {
         private IElement mPage;
         private Direction mDirection;
@@ -32,7 +44,9 @@ public class ElementWizard extends ElementContainer {
         }
     }
 
+    /** Титульный текст кнопки "Далее" */
     private String mNextCaption;
+    /** Титульный текст кнопки "Назад" */
     private String mPrevCaption;
     private int curIdx = 0;
 

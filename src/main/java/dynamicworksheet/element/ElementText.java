@@ -6,6 +6,12 @@ import dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.functions.Consumer;
 
+/**
+ * Элемент - лейбл.
+ * Передаваемые сигналы:
+ * - сигнал об изменении текста {@link MessageInteractTextChanged}
+ * Получаемые сигналы: отсутствуют
+ */
 public class ElementText extends ElementBase<String> {
 
     public ElementText(@Nullable IElement root, IValue<String> value) {

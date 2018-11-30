@@ -31,6 +31,11 @@ public class UIBuilder {
             .registerTypeAdapter(IJsonDummyValidationCase.class, new ValidationCaseGsonAdapter())
             .create();
 
+    /**
+     * Парсит джейсон в список ядерных элементов
+     * @param json джейсон с описанием элементов
+     * @return список ядерных элементов, которые затем через адаптеры RUI отображаются на экране
+     */
     public static List<IElement> parse(String json) {
         List<IElement> ret = new ArrayList<>();
         try {

@@ -8,6 +8,14 @@ import dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.functions.Consumer;
 
+/**
+ * Элемент - текстовый ввод
+ * Передаваемые сигналы:
+ * - сигнал об изменении текста {@link MessageInteractTextChanged}
+ * Получаемые сигналы:
+ * - сигнал об изменении текста {@link MessageInteractTextChanged}
+ * - сигнал об изменении фокуса элемента {@link MessageInteractFocusChanged}
+ */
 public class ElementInput extends ElementBase<String> {
 
     private String mPlaceholder;

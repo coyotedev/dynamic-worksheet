@@ -4,6 +4,10 @@ import dynamicworksheet.type.UIType;
 import dynamicworksheet.value.IValue;
 import io.reactivex.annotations.Nullable;
 
+/**
+ * Элемент - текстовый ввод даты.
+ * Отличается от обычного ввода наличием обязательной маски, определяющей формат ввода даты.
+ */
 public class ElementDate extends ElementInput {
     private String mDateFormat;
 

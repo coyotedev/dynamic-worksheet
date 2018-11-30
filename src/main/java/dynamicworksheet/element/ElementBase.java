@@ -26,7 +26,10 @@ import java.util.Locale;
 
 /**
  * Базовый класс наследования для любого элемента.
- * @param <T> {@inheritDoc}
+ * Передаваемые сигналы:
+ * - сигнал об изменении состояния видимости {@link MessageInteractHiddenChanged}
+ * Получаемые сигналы: отсутствуют
+ * @param <T>{@inheritDoc}
  */
 public abstract class ElementBase<T> implements IElement<T> {
 
@@ -95,9 +98,7 @@ public abstract class ElementBase<T> implements IElement<T> {
     }
 
     @Override
-    public void onInteract(MessageInteract message) {
-
-    }
+    public void onInteract(MessageInteract message) {}
 
     @Override
     public IElement getRoot() {

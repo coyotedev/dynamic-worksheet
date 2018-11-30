@@ -8,6 +8,17 @@ import dynamicworksheet.value.IValue;
 import io.reactivex.annotations.Nullable;
 import io.reactivex.functions.Consumer;
 
+/**
+ * Элемент - загрузка файла.
+ * Представляет область, взаимодействуя с которой пользователь может указать файл на устройстве,
+ * необходимый для аплоада в данном участке анкеты.
+ * Базовый тип - {@link dynamicworksheet.validation.ValidationUpload.FileParams}
+ * Может иметь текстовый плейсхолдер.
+ * Передаваемые сигналы:
+ * - сигнал о изменении параметров файла {@link MessageInteractFileChanged}
+ * Получаемые сигналы:
+ * - сигнал о изменении параметров файла {@link MessageInteractFileChanged}
+ */
 public class ElementFileUpload extends ElementBase<ValidationUpload.FileParams> {
     private String mPlaceholder;
 

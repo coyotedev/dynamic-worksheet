@@ -4,7 +4,15 @@ import dynamicworksheet.value.IValue;
 import dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
 
+/**
+ * Элемент - ссылка на картинку.
+ * Представляет картинку, источник которой является ссылкой.
+ * Базовое значение - url, параметры см. {@link Size}
+ */
 public class ElementImageUrl extends ElementBase<String> {
+    /**
+     * Основные параметры элемента {@link ElementImageUrl} - ширина и высота отображаемой картинки
+     */
     public static class Size {
         private int mWidth;
         private int mHeight;
