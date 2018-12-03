@@ -1,4 +1,4 @@
-package net.coyotedev.androidworksheet.uiadapter;
+package com.fsl.androidworksheet.uiadapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,7 +12,7 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import net.coyotedev.androidworksheet.R;
+import com.fsl.androidworksheet.R;
 
 import java.lang.reflect.Method;
 import java.util.List;

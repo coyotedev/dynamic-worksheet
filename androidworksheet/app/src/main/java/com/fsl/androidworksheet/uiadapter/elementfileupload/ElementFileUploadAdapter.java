@@ -1,4 +1,4 @@
-package net.coyotedev.androidworksheet.uiadapter.elementfileupload;
+package com.fsl.androidworksheet.uiadapter.elementfileupload;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import net.coyotedev.androidworksheet.BuildConfig;
-import net.coyotedev.androidworksheet.uiadapter.IElementAdapter;
+import com.fsl.androidworksheet.BuildConfig;
+import com.fsl.androidworksheet.uiadapter.IElementAdapter;
 
 import java.io.File;
 import java.util.Locale;

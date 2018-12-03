@@ -1,4 +1,4 @@
-package net.coyotedev.androidworksheet;
+package com.fsl.androidworksheet;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

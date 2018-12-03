@@ -1,4 +1,4 @@
-package net.coyotedev.androidworksheet;
+package com.fsl.androidworksheet;
 
 import org.junit.Test;
 
