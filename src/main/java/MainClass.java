@@ -2,19 +2,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
 
-import dynamicworksheet.element.IElement;
-import dynamicworksheet.jsondummy.IJsonDummy;
-import dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
-import dynamicworksheet.jsondummy.value.IJsonDummyValue;
-import dynamicworksheet.util.*;
+import core.dynamicworksheet.element.IElement;
+import core.dynamicworksheet.jsondummy.IJsonDummy;
+import core.dynamicworksheet.jsondummy.validation.validationcase.IJsonDummyValidationCase;
+import core.dynamicworksheet.jsondummy.value.IJsonDummyValue;
+import core.dynamicworksheet.util.ValidationCaseGsonAdapter;
 
 import java.io.FileReader;
 
 public class MainClass {
     public static void main(String[] args) {
         Gson gson = new GsonBuilder()
-                .registerTypeAdapter(IJsonDummy.class, new ElementGsonAdapter())
-                .registerTypeAdapter(IJsonDummyValue.class, new ValueGsonAdapter())
+                .registerTypeAdapter(IJsonDummy.class, new core.dynamicworksheet.util.ElementGsonAdapter())
+                .registerTypeAdapter(IJsonDummyValue.class, new core.dynamicworksheet.util.ValueGsonAdapter())
                 .registerTypeAdapter(IJsonDummyValidationCase.class, new ValidationCaseGsonAdapter())
                 .create();
 

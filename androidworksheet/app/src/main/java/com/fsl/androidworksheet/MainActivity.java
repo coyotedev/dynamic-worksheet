@@ -5,12 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fsl.androidworksheet.uiadapter.ElementAdapter;
+import com.fsl.androidworksheet.core.uiadapter.ElementAdapter;
 
 import java.util.List;
 
-import dynamicworksheet.UIBuilder;
-import dynamicworksheet.element.IElement;
+import core.dynamicworksheet.UIBuilder;
+import core.dynamicworksheet.element.IElement;
 
 public class MainActivity extends AppCompatActivity {
 

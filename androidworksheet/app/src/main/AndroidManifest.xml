@@ -21,7 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.fsl.androidworksheet.uiadapter.elementfileupload.HelperActivity"></activity>
+        <activity android:name=".core.uiadapter.elementfileupload.HelperActivity"></activity>
     </application>
 
 </manifest>
