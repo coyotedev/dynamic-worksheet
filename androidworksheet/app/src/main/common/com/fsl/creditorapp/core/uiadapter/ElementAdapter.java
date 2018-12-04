@@ -1,10 +1,10 @@
-package com.fsl.androidworksheet.core.uiadapter;
+package com.fsl.creditorapp.core.uiadapter;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fsl.androidworksheet.core.uiadapter.elementfileupload.ElementFileUploadAdapter;
+import com.fsl.creditorapp.core.uiadapter.elementfileupload.ElementFileUploadAdapter;
 
 import core.dynamicworksheet.element.IElement;
 

@@ -1,4 +1,4 @@
-package com.fsl.androidworksheet.core.uiadapter;
+package com.fsl.creditorapp.core.uiadapter;
 
 import android.content.Context;
 import android.view.View;

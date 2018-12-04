@@ -22,6 +22,7 @@ android {
     sourceSets {
         main {
             java.srcDirs += ['src/main/common']
+            res.srcDirs += ['src/main/common_res/res']
         }
     }
 

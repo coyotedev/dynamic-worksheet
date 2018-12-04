@@ -1,4 +1,4 @@
-package com.fsl.androidworksheet.core.uiadapter;
+package com.fsl.creditorapp.core.uiadapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ScrollView;
 
-import com.fsl.androidworksheet.R;
+import com.fsl.creditorapp.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.fsl.androidworksheet.core.uiadapter.elementfileupload;
+package com.fsl.creditorapp.core.uiadapter.elementfileupload;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.fsl.androidworksheet.BuildConfig;
-import com.fsl.androidworksheet.core.uiadapter.IElementAdapter;
+import com.fsl.creditorapp.BuildConfig;
+import com.fsl.creditorapp.core.uiadapter.IElementAdapter;
 
 import java.io.File;
 import java.util.Locale;

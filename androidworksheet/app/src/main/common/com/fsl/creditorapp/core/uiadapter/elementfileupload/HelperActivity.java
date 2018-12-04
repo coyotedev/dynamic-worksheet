@@ -1,4 +1,4 @@
-package com.fsl.androidworksheet.core.uiadapter.elementfileupload;
+package com.fsl.creditorapp.core.uiadapter.elementfileupload;
 
 import android.Manifest;
 import android.content.DialogInterface;

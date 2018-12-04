@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.fsl.androidworksheet.core.uiadapter.ElementAdapter;
+import com.fsl.creditorapp.R;
+import com.fsl.creditorapp.core.uiadapter.ElementAdapter;
 
 import java.util.List;
 
