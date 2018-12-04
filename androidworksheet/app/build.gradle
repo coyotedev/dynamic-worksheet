@@ -18,6 +18,13 @@ android {
     }
     productFlavors {
     }
+
+    sourceSets {
+        main {
+            java.srcDirs += ['src/main/common']
+        }
+    }
+
 }
 
 dependencies {
