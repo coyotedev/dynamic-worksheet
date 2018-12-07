@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,7 @@ public class ElementDateAdapter extends ElementInputAdapter {
     @Override
     public View build(IElement element, ViewGroup root, Context ctx) {
         TextInputLayout ret = new TextInputLayout(ctx);
-        final EditText editText = new EditText(ctx);
+        final AppCompatEditText editText = new AppCompatEditText(ctx);
         ret.addView(editText);
         ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         ret.setErrorEnabled(true);

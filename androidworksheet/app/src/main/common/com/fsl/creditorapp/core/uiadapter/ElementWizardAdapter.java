@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.AndroidRuntimeException;
+import android.support.v7.widget.AppCompatButton;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,17 +25,16 @@ import core.dynamicworksheet.message.interact.MessageInteractPageChangeRequest;
 import core.dynamicworksheet.message.interact.MessageInteractPageChanged;
 import core.dynamicworksheet.type.Direction;
 import core.dynamicworksheet.util.mutablevalue.MutableValue;
-import core.dynamicworksheet.validation.IValidation;
 
 public class ElementWizardAdapter implements IElementAdapter {
     private static final boolean IS_PAGER_SCROLL_SMOOTH = true;
 
     class ButtonsManager {
-        private Button mPrev;
-        private Button mNext;
+        private AppCompatButton mPrev;
+        private AppCompatButton mNext;
         private Context mCtx;
 
-        ButtonsManager(Context ctx, Button prev, Button next) {
+        ButtonsManager(Context ctx, AppCompatButton prev, AppCompatButton next) {
             mPrev = prev;
             mNext = next;
             mCtx = ctx;
@@ -56,8 +55,8 @@ public class ElementWizardAdapter implements IElementAdapter {
     public View build(final IElement element, final ViewGroup root, final Context ctx) {
         final View ret = LayoutInflater.from(ctx).inflate(R.layout.v_wizard, root, false);
         final ViewPager pager = ret.findViewById(R.id.id_wizard_pager);
-        final Button buttonPrev = ret.findViewById(R.id.id_wizard_button_prev);
-        final Button buttonNext = ret.findViewById(R.id.id_wizard_button_next);
+        final AppCompatButton buttonPrev = ret.findViewById(R.id.id_wizard_button_prev);
+        final AppCompatButton buttonNext = ret.findViewById(R.id.id_wizard_button_next);
         final ButtonsManager buttonsManager = new ButtonsManager(ctx, buttonPrev, buttonNext);
         final ElementWizard wizard = (ElementWizard) element;
         final List<View> pages = new ArrayList<>();

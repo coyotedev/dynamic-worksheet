@@ -1,6 +1,8 @@
 package com.fsl.creditorapp.core.uiadapter;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatRadioButton;
+import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -29,14 +31,14 @@ public class ElementRadioGroupAdapter implements IElementAdapter {
         ret.setOrientation(LinearLayout.VERTICAL);
 
         // title for radioGroup
-        final TextView title = new TextView(ctx);
+        final AppCompatTextView title = new AppCompatTextView(ctx);
         ret.addView(title);
 
         // add radioButtons
         List<Option> options = radioGroup.getOptions();
         final List<RadioButton> buttons = new ArrayList<>();
         for (int i = 0; i < options.size(); ++i) {
-            RadioButton button = new RadioButton(ctx);
+            AppCompatRadioButton button = new AppCompatRadioButton(ctx);
             Option option = options.get(i);
             button.setTag(option.getValue());
             button.setText(option.getLabel());

@@ -3,13 +3,12 @@ package com.fsl.creditorapp.core.uiadapter;
 import android.content.Context;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TableRow;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class ElementInputAdapter implements IElementAdapter {
     @Override
     public View build(final IElement element, ViewGroup root, final Context ctx) {
         TextInputLayout ret = new TextInputLayout(ctx);
-        final EditText editText = new EditText(ctx);
+        final AppCompatEditText editText = new AppCompatEditText(ctx);
         ret.addView(editText);
         ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         ret.setErrorEnabled(true);
