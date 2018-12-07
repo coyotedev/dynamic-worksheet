@@ -1,9 +1,11 @@
 package com.fsl.creditorapp.core.uiadapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.AndroidRuntimeException;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -28,15 +30,39 @@ import core.dynamicworksheet.validation.IValidation;
 public class ElementWizardAdapter implements IElementAdapter {
     private static final boolean IS_PAGER_SCROLL_SMOOTH = true;
 
+    class ButtonsManager {
+        private Button mPrev;
+        private Button mNext;
+        private Context mCtx;
+
+        ButtonsManager(Context ctx, Button prev, Button next) {
+            mPrev = prev;
+            mNext = next;
+            mCtx = ctx;
+        }
+
+        void setEnabled(boolean prev, boolean next) {
+            ((Activity) mCtx).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mPrev.setEnabled(prev);
+                    mNext.setEnabled(next);
+                }
+            });
+        }
+    }
+
     @Override
     public View build(final IElement element, final ViewGroup root, final Context ctx) {
         final View ret = LayoutInflater.from(ctx).inflate(R.layout.v_wizard, root, false);
         final ViewPager pager = ret.findViewById(R.id.id_wizard_pager);
         final Button buttonPrev = ret.findViewById(R.id.id_wizard_button_prev);
         final Button buttonNext = ret.findViewById(R.id.id_wizard_button_next);
+        final ButtonsManager buttonsManager = new ButtonsManager(ctx, buttonPrev, buttonNext);
         final ElementWizard wizard = (ElementWizard) element;
         final List<View> pages = new ArrayList<>();
         final MutableValue<Direction> direction = new MutableValue<>(Direction.Static);
+        final MutableValue<ElementWizard.PageBundle.BoundsState> boundState = new MutableValue<>(null);
 
         // pager setup
         {
@@ -107,14 +133,16 @@ public class ElementWizardAdapter implements IElementAdapter {
                                 pages.remove(1);
                                 adapter.notifyDataSetChanged();
                             }
-                            buttonPrev.setEnabled(true);
                         }
                         if (scrollPosition == 1) {
                             if (adapter != null) {
                                 pages.remove(0);
                                 adapter.notifyDataSetChanged();
                             }
-                            buttonNext.setEnabled(true);
+                        }
+                        ElementWizard.PageBundle.BoundsState state = boundState.getValue();
+                        if (state != null) {
+                            buttonsManager.setEnabled(state.isStartBoundReached(), state.isEndBoundReached());
                         }
                     }
                 }
@@ -127,6 +155,7 @@ public class ElementWizardAdapter implements IElementAdapter {
             buttonPrev.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    buttonsManager.setEnabled(false, false);
                     direction.setValue(Direction.Prev);
                     wizard.onInteract(new MessageInteractPageChangeRequest(Direction.Prev));
                 }
@@ -136,6 +165,7 @@ public class ElementWizardAdapter implements IElementAdapter {
             buttonNext.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    buttonsManager.setEnabled(false, false);
                     direction.setValue(Direction.Next);
                     wizard.onInteract(new MessageInteractPageChangeRequest(Direction.Next));
                 }
@@ -151,6 +181,7 @@ public class ElementWizardAdapter implements IElementAdapter {
                     if (message.getClass().isAssignableFrom(MessageInteractPageChanged.class)) {
                         MessageInteractPageChanged msg = (MessageInteractPageChanged) message;
                         PagerAdapter adapter = pager.getAdapter();
+                        boundState.setValue(msg.getPageBundle().getBoundsState());
 
                         ScrollView scr = new ScrollView(ctx);
                         scr.setFillViewport(true);
@@ -162,7 +193,6 @@ public class ElementWizardAdapter implements IElementAdapter {
                                     adapter.notifyDataSetChanged();
                                     pager.setCurrentItem(0, IS_PAGER_SCROLL_SMOOTH);
                                 }
-                                buttonNext.setEnabled(true);
                                 break;
                             }
                             case Next: {
@@ -171,7 +201,6 @@ public class ElementWizardAdapter implements IElementAdapter {
                                     adapter.notifyDataSetChanged();
                                     pager.setCurrentItem(1, IS_PAGER_SCROLL_SMOOTH);
                                 }
-                                buttonPrev.setEnabled(true);
                                 break;
                             }
                             case Static: {
@@ -179,6 +208,8 @@ public class ElementWizardAdapter implements IElementAdapter {
                                 if (adapter != null) {
                                     pages.add(scr);
                                     adapter.notifyDataSetChanged();
+                                    ElementWizard.PageBundle.BoundsState state = boundState.getValue();
+                                    buttonsManager.setEnabled(state.isStartBoundReached(), state.isEndBoundReached());
                                 }
                                 break;
                             }
@@ -186,22 +217,14 @@ public class ElementWizardAdapter implements IElementAdapter {
                     }
                 }
             });
-            element.setValidationHandler(new IValidation.ValidationHandler() {
+            element.setValidationHandler(new IElement.IValidationHandler() {
                 @Override
-                public void onPassed() {
-                    switch (direction.getValue()) {
-                        case Prev:
-                            buttonPrev.setEnabled(false);
-                            break;
-                        case Next:
-                            buttonNext.setEnabled(false);
-                            break;
-                    }
-                }
+                public void onPassed() {}
 
                 @Override
-                public void onError(String error) {
-
+                public void onError(List<String> errors) {
+                    ElementWizard.PageBundle.BoundsState state = boundState.getValue();
+                    buttonsManager.setEnabled(state.isStartBoundReached(), state.isEndBoundReached());
                 }
             });
         }

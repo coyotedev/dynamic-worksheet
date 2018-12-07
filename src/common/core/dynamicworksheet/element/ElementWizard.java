@@ -1,7 +1,9 @@
 package core.dynamicworksheet.element;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import core.dynamicworksheet.validation.IValidation;
 import core.dynamicworksheet.value.ValueSimple;
 import core.dynamicworksheet.type.Direction;
 import core.dynamicworksheet.type.UIType;
@@ -22,13 +24,37 @@ public class ElementWizard extends ElementContainer {
      * Хранит новую страницу и направление изменения {@link Direction} (может быть статичным - это
      * значит, что страница была просто загружена, а не прокручена.
      */
-    public class PageBundle {
-        private IElement mPage;
-        private Direction mDirection;
+    public static class PageBundle {
 
-        public PageBundle(IElement page, Direction direction) {
+        public static class BoundsState {
+            private boolean mIsStartBoundReached;
+            private boolean mIsEndBoundReached;
+
+            BoundsState(boolean start, boolean end) {
+                mIsStartBoundReached = start;
+                mIsEndBoundReached = end;
+            }
+
+            public boolean isStartBoundReached() {
+                return mIsStartBoundReached;
+            }
+
+            public boolean isEndBoundReached() {
+                return mIsEndBoundReached;
+            }
+        }
+
+        /** Элемент, представляющий страницу */
+        private IElement mPage;
+        /** Направление смены страницы */
+        private Direction mDirection;
+        /** Признаки состояния границ (возможность пойти на страницу до или после текущей) */
+        private BoundsState mBoundsState;
+
+        PageBundle(IElement page, Direction direction, BoundsState boundState) {
             mPage = page;
             mDirection = direction;
+            mBoundsState = boundState;
         }
 
         public IElement getPage() {
@@ -37,6 +63,10 @@ public class ElementWizard extends ElementContainer {
 
         public Direction getDirection() {
             return mDirection;
+        }
+
+        public BoundsState getBoundsState() {
+            return mBoundsState;
         }
     }
 
@@ -92,7 +122,7 @@ public class ElementWizard extends ElementContainer {
 //            for (IElement it : validations) {
 //                valid &= it.checkValid();
 //            }
-            core.dynamicworksheet.validation.IValidation.ValidationHandler validHandler = getValidationHandler();
+            IValidationHandler validHandler = getValidationHandler();
             if (valid) {
                 if (validHandler != null) {
                     validHandler.onPassed();
@@ -100,18 +130,20 @@ public class ElementWizard extends ElementContainer {
                 switch (msg.getDirection()) {
                     case Prev:
                         if (curIdx > 0) {
-                            getValue().setValue(new PageBundle(children.get(--curIdx), Direction.Prev));
+                            int newIdx = --curIdx;
+                            getValue().setValue(new PageBundle(children.get(newIdx), Direction.Prev, new PageBundle.BoundsState(newIdx > 0, true)));
                         }
                         break;
                     case Next:
                         if (curIdx < children.size() - 1) {
-                            getValue().setValue(new PageBundle(children.get(++curIdx), Direction.Next));
+                            int newIdx = ++curIdx;
+                            getValue().setValue(new PageBundle(children.get(newIdx), Direction.Next, new PageBundle.BoundsState(true, newIdx < children.size() - 1)));
                         }
                         break;
                 }
             } else {
                 if (validHandler != null) {
-                    validHandler.onError("");
+                    validHandler.onError(new ArrayList<>());
                 }
             }
         }
@@ -132,7 +164,7 @@ public class ElementWizard extends ElementContainer {
     public void setChildren(List<IElement> children) {
         super.setChildren(children);
         if (!children.isEmpty()) {
-            setValue(new ValueSimple<>(new PageBundle(children.get(0), Direction.Static)));
+            setValue(new ValueSimple<>(new PageBundle(children.get(0), Direction.Static, new PageBundle.BoundsState(false, children.size() > 1))));
         }
     }
 }

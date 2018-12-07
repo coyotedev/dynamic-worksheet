@@ -3,6 +3,7 @@ package core.dynamicworksheet.element;
 import core.dynamicworksheet.value.IValue;
 import core.dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
+import io.reactivex.functions.Consumer;
 
 /**
  * Элемент - ссылка на картинку.
@@ -44,5 +45,16 @@ public class ElementImageUrl extends core.dynamicworksheet.element.ElementBase<S
 
     public Size getSize() {
         return mSize;
+    }
+
+    @Override
+    public void setAdapter(Adapter adapter) {
+        super.setAdapter(adapter);
+        mAdapterSubscribes.add(getValue().getObservable().subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String url) throws Exception {
+                getAdapter().onInteract(new core.dynamicworksheet.message.interact.MessageInteractTextChanged(url));
+            }
+        }));
     }
 }

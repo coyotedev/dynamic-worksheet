@@ -1,5 +1,6 @@
 package core.dynamicworksheet.element;
 
+import core.dynamicworksheet.validation.IValidation;
 import core.dynamicworksheet.value.IValue;
 import core.dynamicworksheet.type.UIType;
 import io.reactivex.annotations.Nullable;
@@ -28,6 +29,15 @@ public interface IElement<T> {
          */
         void onInteract(core.dynamicworksheet.message.interact.MessageInteract message);
     }
+
+    /**
+     * Интерфейс обработчика результата валидации, реализуется на стороне адаптера RUI
+     */
+    interface IValidationHandler {
+        void onPassed();
+        void onError(List<String> errors);
+    }
+
     void setId(String id);
     String getid();
     /**
@@ -65,10 +75,10 @@ public interface IElement<T> {
     Adapter getAdapter();
     /**
      * Сеттер для обработчика валидаций для данного элемента, устанавливается адаптером RUI.
-     * @param handler {@link core.dynamicworksheet.validation.IValidation.ValidationHandler}
+     * @param handler {@link IValidationHandler}
      */
-    void setValidationHandler(core.dynamicworksheet.validation.IValidation.ValidationHandler handler);
-    core.dynamicworksheet.validation.IValidation.ValidationHandler getValidationHandler();
+    void setValidationHandler(IValidationHandler handler);
+    IValidationHandler getValidationHandler();
 
     void addChild(IElement child);
     void setChildren(List<IElement> children);

@@ -27,7 +27,7 @@ public abstract class ElementBase<T> implements IElement<T> {
 
     private final IElement mRoot;
     private Adapter mRUIAdapter;
-    private core.dynamicworksheet.validation.IValidation.ValidationHandler mValidationHandler;
+    private IValidationHandler mIValidationHandler;
     private List<IElement> mChildren = new ArrayList<>();
     /**
      * Список актуальных подписок для адаптера RUI любого из вложенных ValueSource. Необходимо не
@@ -115,13 +115,13 @@ public abstract class ElementBase<T> implements IElement<T> {
     }
 
     @Override
-    public void setValidationHandler(core.dynamicworksheet.validation.IValidation.ValidationHandler handler) {
-        mValidationHandler = handler;
+    public void setValidationHandler(IValidationHandler handler) {
+        mIValidationHandler = handler;
     }
 
     @Override
-    public core.dynamicworksheet.validation.IValidation.ValidationHandler getValidationHandler() {
-        return mValidationHandler;
+    public IValidationHandler getValidationHandler() {
+        return mIValidationHandler;
     }
 
     @Override
@@ -179,7 +179,7 @@ public abstract class ElementBase<T> implements IElement<T> {
                             .setMaxHeight(jsonDummy.mMaxHeight)
                             .build();
 
-                    mValidations.add(new core.dynamicworksheet.validation.ValidationUpload((IValue<core.dynamicworksheet.validation.ValidationUpload.FileParams>) getValue(), refParams, error));
+                    mValidations.add(new core.dynamicworksheet.validation.ValidationUpload((IValue<ElementFileUpload.FileParams>) getValue(), refParams, error));
                 }
             }
         }
@@ -191,8 +191,20 @@ public abstract class ElementBase<T> implements IElement<T> {
             return true;
         }
         boolean ret = true;
+        List<String> errors = new ArrayList<>();
         for (core.dynamicworksheet.validation.IValidation it : mValidations) {
-            ret &= it.check(mValidationHandler);
+            boolean result = it.check();
+            if (!result) {
+                errors.add(it.getError());
+            }
+            ret &= result;
+        }
+        if (mIValidationHandler != null) {
+            if (ret) {
+                mIValidationHandler.onPassed();
+            } else {
+                mIValidationHandler.onError(errors);
+            }
         }
         return ret;
     }

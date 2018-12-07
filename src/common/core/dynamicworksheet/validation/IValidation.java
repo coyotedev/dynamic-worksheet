@@ -8,15 +8,8 @@ import core.dynamicworksheet.value.IValue;
  * своего состояния.
  */
 public interface IValidation {
-    /**
-     * Интерфейс обработчика результата валидации, реализуется на стороне адаптера RUI
-     */
-    abstract class ValidationHandler {
-        public abstract void onPassed();
-        public abstract void onError(String error);
-    }
 
-    boolean check(ValidationHandler handler);
+    boolean check();
     boolean isPassed();
     String getError();
 }

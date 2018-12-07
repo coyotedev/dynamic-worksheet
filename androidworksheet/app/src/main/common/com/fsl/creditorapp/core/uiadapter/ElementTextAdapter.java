@@ -3,6 +3,7 @@ package com.fsl.creditorapp.core.uiadapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import core.dynamicworksheet.element.IElement;
@@ -13,7 +14,7 @@ public class ElementTextAdapter implements IElementAdapter {
     @Override
     public View build(IElement element, ViewGroup root, Context ctx) {
         final TextView ret = new TextView(ctx);
-
+        ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         // core ui connection setup
         {
             element.setAdapter(new AdapterBase(ret) {

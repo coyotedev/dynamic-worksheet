@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.support.v7.widget.AppCompatSpinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.fsl.creditorapp.R;
@@ -99,6 +100,7 @@ public class ElementSelectAdapter implements IElementAdapter {
     @Override
     public View build(final IElement element, ViewGroup root, Context ctx) {
         final TitleSpinner ret = new TitleSpinner(ctx);
+        ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
         ElementSelect select = (ElementSelect) element;
 
         // choices list set

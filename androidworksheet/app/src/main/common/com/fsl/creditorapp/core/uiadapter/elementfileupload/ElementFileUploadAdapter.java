@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.fsl.creditorapp.BuildConfig;
@@ -61,8 +62,12 @@ public class ElementFileUploadAdapter implements IElementAdapter {
     @Override
     public View build(final IElement element, ViewGroup root, final Context ctx) {
         final BehaviourRelativeLayout ret = new BehaviourRelativeLayout(ctx);
+        ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT/*, 1f*/));
         TextView label = new TextView(ctx);
         final ImageView image = new ImageView(ctx);
+//        image.setMaxWidth(400);
+//        image.setMaxHeight(400);
+        image.setAdjustViewBounds(true);
         ElementFileUpload file = (ElementFileUpload) element;
 
         label.setText(file.getPlaceholder());
@@ -83,7 +88,7 @@ public class ElementFileUploadAdapter implements IElementAdapter {
                         options.inJustDecodeBounds = true;
                         BitmapFactory.decodeFile(value, options);
 
-                        ValidationUpload.FileParams params = new ValidationUpload.FileParams
+                        ElementFileUpload.FileParams params = new ElementFileUpload.FileParams
                                 (
                                         value,
                                         humanReadableFileSize(new File(value).length()),
@@ -120,7 +125,7 @@ public class ElementFileUploadAdapter implements IElementAdapter {
                 super.onInteract(message);
                 if (message.getClass().isAssignableFrom(MessageInteractFileChanged.class)) {
                     MessageInteractFileChanged msg = (MessageInteractFileChanged) message;
-                    image.setImageURI(Uri.fromFile(new File(((MessageInteractFileChanged) message).getParams().mPath)));
+                    image.setImageURI(Uri.fromFile(new File(msg.getParams().getPath())));
                 }
             }
         });

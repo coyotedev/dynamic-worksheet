@@ -1,34 +1,45 @@
 package com.fsl.creditorapp.core.uiadapter;
 
 import android.content.Context;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TableRow;
+
+import java.util.List;
 
 import core.dynamicworksheet.element.ElementInput;
 import core.dynamicworksheet.element.IElement;
 import core.dynamicworksheet.message.interact.MessageInteract;
 import core.dynamicworksheet.message.interact.MessageInteractFocusChanged;
 import core.dynamicworksheet.message.interact.MessageInteractTextChanged;
-import core.dynamicworksheet.validation.IValidation;
 
 public class ElementInputAdapter implements IElementAdapter {
     @Override
     public View build(final IElement element, ViewGroup root, final Context ctx) {
-        final EditText ret = new EditText(ctx);
+        TextInputLayout ret = new TextInputLayout(ctx);
+        final EditText editText = new EditText(ctx);
+        ret.addView(editText);
+        ret.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1f));
+        ret.setErrorEnabled(true);
         ElementInput input = (ElementInput) element;
-        input.setValidationHandler(new IValidation.ValidationHandler() {
+        input.setValidationHandler(new IElement.IValidationHandler() {
             @Override
             public void onPassed() {
-                ret.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_green_light));
+                editText.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_green_light));
+                ret.setError("");
             }
 
             @Override
-            public void onError(String error) {
-                ret.setBackgroundColor(ContextCompat.getColor(ctx, android.R.color.holo_red_light));
+            public void onError(List<String> errors) {
+                String error = TextUtils.join("\n", errors);
+                ret.setError(error);
             }
         });
         ret.setHint(input.getPlaceholder());
@@ -39,7 +50,7 @@ public class ElementInputAdapter implements IElementAdapter {
         return ret;
     }
 
-    protected void setupCoreConnections(final IElement element, final EditText view) {
+    protected void setupCoreConnections(final IElement element, final TextInputLayout view) {
         element.setAdapter(new AdapterBase(view) {
             @Override
             public void onInteract(MessageInteract message) {
@@ -47,14 +58,14 @@ public class ElementInputAdapter implements IElementAdapter {
                 if (message.getClass().isAssignableFrom(MessageInteractTextChanged.class)) {
                     MessageInteractTextChanged msg = (MessageInteractTextChanged) message;
                     String text = msg.getText();
-                    if (!view.getText().toString().equals(text)) {
-                        view.setText(text);
+                    if (!view.getEditText().getText().toString().equals(text)) {
+                        view.getEditText().setText(text);
                     }
                 }
             }
         });
 
-        view.addTextChangedListener(new TextWatcher() {
+        view.getEditText().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
             @Override
@@ -65,7 +76,7 @@ public class ElementInputAdapter implements IElementAdapter {
             public void afterTextChanged(Editable editable) {}
         });
 
-        view.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        view.getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
                 element.onInteract(new MessageInteractFocusChanged(b));

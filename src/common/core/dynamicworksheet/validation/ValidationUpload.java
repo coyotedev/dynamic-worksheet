@@ -1,5 +1,6 @@
 package core.dynamicworksheet.validation;
 
+import core.dynamicworksheet.element.ElementFileUpload;
 import core.dynamicworksheet.value.IValue;
 
 import java.util.HashMap;
@@ -26,10 +27,10 @@ public class ValidationUpload extends core.dynamicworksheet.validation.Validatio
         put("Gb", 3);
     }};
 
-    private final IValue<FileParams> mParams;
+    private final IValue<ElementFileUpload.FileParams> mParams;
     private final FileRefParams mReference;
 
-    public ValidationUpload(IValue<FileParams> params, FileRefParams ref, String error) {
+    public ValidationUpload(IValue<ElementFileUpload.FileParams> params, FileRefParams ref, String error) {
         super(error);
         mParams = params;
         mReference = ref;
@@ -38,22 +39,6 @@ public class ValidationUpload extends core.dynamicworksheet.validation.Validatio
     @Override
     public boolean isPassed() {
         return mReference.isFits(mParams.getValue());
-    }
-
-    public static class FileParams {
-        public String mPath;
-        public String mSize;
-        public String mExtensions;
-        public Integer mWidth;
-        public Integer mHeight;
-
-        public FileParams(String path, String size, String ext, int width, int height) {
-            mPath = path;
-            mSize = size;
-            mExtensions = ext;
-            mWidth = width;
-            mHeight = height;
-        }
     }
 
     public static class FileRefParams {
@@ -72,11 +57,11 @@ public class ValidationUpload extends core.dynamicworksheet.validation.Validatio
             checkValid();
         }
 
-        public boolean isFits(FileParams other) {
+        public boolean isFits(ElementFileUpload.FileParams other) {
             {
                 Pattern pattern = Pattern.compile(REGEX_FILE_SIZE);
                 Matcher matcherThis = pattern.matcher(mSize);
-                Matcher matcherOther = pattern.matcher(other.mSize);
+                Matcher matcherOther = pattern.matcher(other.getSize());
                 if (matcherThis.find() && matcherOther.find()) {
                     int dimensThis = SIZE_DIMENS_ORDER.get(matcherThis.group(REGEX_FILE_SIZE_GROUP_DIMENS));
                     int dimensOther = SIZE_DIMENS_ORDER.get(matcherOther.group(REGEX_FILE_SIZE_GROUP_DIMENS));
@@ -94,13 +79,13 @@ public class ValidationUpload extends core.dynamicworksheet.validation.Validatio
                     return false;
                 }
             }
-            for (String it : other.mExtensions.split(REGEX_FILE_EXTENSIONS_SPLITTER)) {
+            for (String it : other.getExtensions().split(REGEX_FILE_EXTENSIONS_SPLITTER)) {
                 if (!mExtensions.contains(it)) {
                     return false;
                 }
             }
-            if ((other.mWidth < mMinWidth && other.mWidth > mMaxWidth) ||
-                    (other.mHeight < mMinHeight && other.mHeight > mMaxHeight)) {
+            if ((other.getWidth() < mMinWidth && other.getWidth() > mMaxWidth) ||
+                    (other.getHeight() < mMinHeight && other.getHeight() > mMaxHeight)) {
                 return false;
             }
 
